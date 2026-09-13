@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+
+<title>WebStudio — Sitios Web Premium</title>
+
+<style>
+
+:root{
+    --bg:#050505;
+    --bg2:#0b0b0b;
+    --card:#101010;
+    --white:#f5f5f7;
+    --gray:#a1a1a6;
+    --line:rgba(255,255,255,.09);
+    --green:#1ed760;
+    --blue:#2997ff;
+    --radius:28px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,.10), transparent 35%),
+        var(--bg);
+    color:var(--white);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:linear-gradient(to bottom,black,transparent 70%);
+    z-index:-1;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:16px 5%;
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    background:rgba(5,5,5,.65);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-.8px;
+}
+
+.logo span{
+    color:#777;
+}
+
+.nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#aaa;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-cta{
+    background:white;
+    color:black;
+    padding:10px 17px;
+    border-radius:999px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 30px rgba(255,255,255,.15);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    padding:170px 5% 100px;
+    display:flex;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:rgba(255,255,255,.045);
+    filter:blur(100px);
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    pointer-events:none;
+}
+
+.hero-content{
+    max-width:950px;
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.035);
+    border-radius:999px;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:28px;
+    box-shadow:0 10px 50px rgba(0,0,0,.3);
+}
+
+.eyebrow-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 15px white;
+}
+
+.hero h1{
+    font-size:clamp(52px,9vw,105px);
+    line-height:.94;
+    letter-spacing:-6px;
+    font-weight:700;
+    margin-bottom:30px;
+}
+
+.hero h1 span{
+    color:#707070;
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    color:#999;
+    font-size:19px;
+    line-height:1.6;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:15px 23px;
+    border-radius:999px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.35s;
+}
+
+.primary-btn{
+    background:#fff;
+    color:#000;
+    box-shadow:0 15px 50px rgba(255,255,255,.08);
+}
+
+.primary-btn:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 20px 70px rgba(255,255,255,.16);
+}
+
+.secondary-btn{
+    color:white;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.035);
+}
+
+.secondary-btn:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateY(-3px);
+}
+
+/* =========================
+   TRUST
+========================= */
+
+.trust{
+    max-width:1000px;
+    margin:0 auto 110px;
+    padding:0 5%;
+}
+
+.trust-inner{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:28px 0;
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    flex-wrap:wrap;
+}
+
+.trust-item{
+    text-align:center;
+}
+
+.trust-item strong{
+    display:block;
+    font-size:22px;
+}
+
+.trust-item span{
+    display:block;
+    margin-top:5px;
+    color:#777;
+    font-size:12px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    max-width:1250px;
+    margin:auto;
+    padding:90px 5%;
+}
+
+.section-header{
+    margin-bottom:45px;
+}
+
+.section-header .small{
+    color:#777;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:14px;
+}
+
+.section-header h2{
+    font-size:clamp(38px,5vw,62px);
+    letter-spacing:-3px;
+    line-height:1;
+}
+
+.section-header p{
+    margin-top:18px;
+    color:#888;
+    max-width:600px;
+    line-height:1.6;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
+}
+
+.filter{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.035);
+    color:#aaa;
+    border-radius:999px;
+    padding:10px 16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.filter:hover,
+.filter.active{
+    color:#000;
+    background:white;
+}
+
+/* =========================
+   WEBSITE GRID
+========================= */
+
+.web-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.web-card{
+    position:relative;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:linear-gradient(145deg,#111,#090909);
+    transition:.5s cubic-bezier(.2,.8,.2,1);
+}
+
+.web-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.2);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        0 0 70px rgba(255,255,255,.035);
+}
+
+.preview{
+    position:relative;
+    aspect-ratio:16/10;
+    overflow:hidden;
+    background:#111;
+}
+
+.preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:.6s;
+}
+
+.web-card:hover .preview img{
+    transform:scale(1.04);
+}
+
+.preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        transparent 50%
+    );
+    pointer-events:none;
+}
+
+.badge{
+    position:absolute;
+    top:18px;
+    left:18px;
+    z-index:2;
+    background:rgba(0,0,0,.65);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    padding:7px 11px;
+    border-radius:999px;
+    font-size:11px;
+    color:#ddd;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:flex-start;
+}
+
+.card-title{
+    font-size:25px;
+    letter-spacing:-1px;
+}
+
+.card-category{
+    color:#777;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.card-price{
+    font-size:15px;
+    color:#ddd;
+    white-space:nowrap;
+}
+
+.card-description{
+    color:#777;
+    font-size:14px;
+    line-height:1.5;
+    margin:18px 0 23px;
+}
+
+.card-buttons{
+    display:flex;
+    gap:9px;
+}
+
+.demo-btn,
+.quote-btn{
+    flex:1;
+    padding:13px;
+    border-radius:13px;
+    text-align:center;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.demo-btn{
+    color:white;
+    border:1px solid var(--line);
+    background:#151515;
+}
+
+.demo-btn:hover{
+    background:#202020;
+}
+
+.quote-btn{
+    border:none;
+    background:white;
+    color:black;
+}
+
+.quote-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(255,255,255,.12);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.feature{
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:linear-gradient(145deg,#101010,#080808);
+    transition:.4s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    background:#111;
+}
+
+.feature-icon{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:#171717;
+    margin-bottom:25px;
+    font-size:20px;
+}
+
+.feature h3{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#777;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* =========================
+   PROCESS
+========================= */
+
+.process{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.step{
+    border-top:1px solid var(--line);
+    padding-top:22px;
+}
+
+.step-number{
+    color:#555;
+    font-size:12px;
+    margin-bottom:35px;
+}
+
+.step h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.step p{
+    color:#777;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    max-width:1100px;
+    margin:100px auto;
+    padding:80px 40px;
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:38px;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(255,255,255,.12),transparent 45%),
+        #0b0b0b;
+    box-shadow:0 40px 100px rgba(0,0,0,.5);
+}
+
+.cta h2{
+    font-size:clamp(40px,6vw,70px);
+    letter-spacing:-4px;
+}
+
+.cta p{
+    color:#888;
+    max-width:560px;
+    margin:20px auto 30px;
+    line-height:1.6;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    max-width:850px;
+    margin:auto;
+}
+
+details{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+}
+
+summary{
+    cursor:pointer;
+    font-size:17px;
+    font-weight:500;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+}
+
+summary::after{
+    content:"+";
+    color:#777;
+}
+
+details[open] summary::after{
+    content:"−";
+}
+
+details p{
+    color:#777;
+    line-height:1.7;
+    font-size:14px;
+    padding:18px 30px 0 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:45px 5%;
+    color:#666;
+    font-size:12px;
+}
+
+.footer-inner{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:57px;
+    height:57px;
+    border-radius:50%;
+    background:#20c76a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-decoration:none;
+    font-size:25px;
+    z-index:900;
+    box-shadow:0 10px 35px rgba(32,199,106,.28);
+    transition:.3s;
+}
+
+.whatsapp:hover{
+    transform:scale(1.08);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:560px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#101010;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:30px;
+    padding:32px;
+    box-shadow:0 40px 120px rgba(0,0,0,.8);
+    animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:28px;
+}
+
+.modal-header h2{
+    font-size:30px;
+    letter-spacing:-1.5px;
+}
+
+.modal-header p{
+    color:#777;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.close{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#1b1b1b;
+    color:#aaa;
+    border:1px solid var(--line);
+    cursor:pointer;
+    font-size:18px;
+}
+
+.selected{
+    padding:15px;
+    border-radius:15px;
+    background:#171717;
+    border:1px solid var(--line);
+    margin-bottom:22px;
+}
+
+.selected span{
+    color:#777;
+    font-size:11px;
+    display:block;
+    margin-bottom:5px;
+}
+
+.selected strong{
+    font-size:15px;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    color:#aaa;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    background:#080808;
+    border:1px solid var(--line);
+    color:white;
+    border-radius:13px;
+    padding:14px;
+    outline:none;
+    font-family:inherit;
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:rgba(255,255,255,.35);
+    box-shadow:0 0 0 3px rgba(255,255,255,.04);
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.payment-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.payment-option{
+    position:relative;
+}
+
+.payment-option input{
+    position:absolute;
+    opacity:0;
+}
+
+.payment-option label{
+    height:60px;
+    border:1px solid var(--line);
+    background:#080808;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    color:#888;
+    font-size:12px;
+    transition:.3s;
+}
+
+.payment-option input:checked + label{
+    border-color:white;
+    color:white;
+    background:#181818;
+}
+
+.notice{
+    background:rgba(255,255,255,.035);
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:15px;
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+    margin:20px 0;
+}
+
+.submit{
+    width:100%;
+    border:none;
+    padding:16px;
+    border-radius:14px;
+    background:white;
+    color:black;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(255,255,255,.12);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding-top:145px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .trust-inner{
+        gap:35px;
+    }
+
+    .web-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .process{
+        grid-template-columns:1fr 1fr;
+        gap:35px 20px;
+    }
+
+    .cta{
+        margin:70px 5%;
+        padding:55px 25px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+    }
+}
+
+@media(max-width:500px){
+
+    .section{
+        padding:65px 5%;
+    }
+
+    .hero{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .hero h1{
+        font-size:52px;
+    }
+
+    .card-content{
+        padding:20px;
+    }
+
+    .payment-grid{
+        grid-template-columns:1fr;
+    }
+
+    .modal-box{
+        padding:23px;
+        border-radius:23px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAV
+========================= -->
+
+<nav class="navbar">
+
+<div class="nav-inner">
+
+<div class="logo">
+    Web<span>Studio.</span>
+</div>
+
+<ul class="nav-links">
+    <li><a href="#plantillas">Plantillas</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#faq">FAQ</a></li>
+</ul>
+
+<a href="#plantillas" class="nav-cta">
+    Explorar
+</a>
+
+</div>
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+<div class="hero-content">
+
+<div class="eyebrow">
+    <span class="eyebrow-dot"></span>
+    Sitios web diseñados para negocios
+</div>
+
+<h1>
+    Tu negocio.<br>
+    <span>Una nueva presencia.</span>
+</h1>
+
+<p>
+    Explora diseños web profesionales creados para diferentes tipos
+    de negocios. Elige una muestra, visualiza cómo funciona y
+    solicita una cotización personalizada.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#plantillas" class="primary-btn">
+    Explorar sitios
+</a>
+
+<a href="#proceso" class="secondary-btn">
+    ¿Cómo funciona?
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     TRUST
+========================= -->
+
+<section class="trust">
+
+<div class="trust-inner">
+
+<div class="trust-item">
+    <strong>100%</strong>
+    <span>Diseño profesional</span>
+</div>
+
+<div class="trust-item">
+    <strong>Responsive</strong>
+    <span>Celular · Tablet · PC</span>
+</div>
+
+<div class="trust-item">
+    <strong>WhatsApp</strong>
+    <span>Contacto directo</span>
+</div>
+
+<div class="trust-item">
+    <strong>∞</strong>
+    <span>Posibilidades</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PLANTILLAS
+========================= -->
+
+<section class="section" id="plantillas">
+
+<div class="section-header">
+
+<div class="small">
+    Colección
+</div>
+
+<h2>
+    Encuentra tu sitio.
+</h2>
+
+<p>
+    Selecciona el diseño que más se adapte a tu negocio.
+    Cada sitio puede personalizarse según tus necesidades.
+</p>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter active" data-filter="Todos">
+    Todos
+</button>
+
+<button class="filter" data-filter="Menú Digital">
+    Menú Digital
+</button>
+
+<button class="filter" data-filter="Barbería">
+    Barberías
+</button>
+
+<button class="filter" data-filter="Estética">
+    Estética
+</button>
+
+<button class="filter" data-filter="Médicos">
+    Médicos
+</button>
+
+<button class="filter" data-filter="Otros">
+    Otros
+</button>
+
+</div>
+
+
+<div class="web-grid" id="webGrid">
+    <!-- Las páginas se generan desde JavaScript -->
+</div>
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<div class="small">
+    Más que una plantilla
+</div>
+
+<h2>
+    Diseñado para<br>
+    hacer crecer tu negocio.
+</h2>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+
+<div class="feature-icon">✦</div>
+
+<h3>Diseño premium</h3>
+
+<p>
+Interfaces modernas, limpias y profesionales para que
+tu negocio tenga una presencia digital que genere confianza.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">⌁</div>
+
+<h3>Adaptable</h3>
+
+<p>
+Cada proyecto puede adaptarse a tu negocio, información,
+servicios, imágenes, colores y necesidades específicas.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">↗</div>
+
+<h3>Hecho para convertir</h3>
+
+<p>
+Botones de contacto, WhatsApp, llamadas, formularios
+y elementos estratégicamente colocados para facilitar el contacto.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PROCESO
+========================= -->
+
+<section class="section" id="proceso">
+
+<div class="section-header">
+
+<div class="small">
+    Proceso
+</div>
+
+<h2>
+    Así comienza.
+</h2>
+
+</div>
+
+
+<div class="process">
+
+<div class="step">
+
+<div class="step-number">01</div>
+
+<h3>Explora</h3>
+
+<p>
+Revisa las diferentes propuestas y encuentra
+la que mejor represente a tu negocio.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">02</div>
+
+<h3>Visualiza</h3>
+
+<p>
+Entra a la muestra para conocer cómo se
+ve y funciona el sitio.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">03</div>
+
+<h3>Cotiza</h3>
+
+<p>
+Selecciona el sitio y envía tus datos.
+Te contactaremos para continuar.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">04</div>
+
+<h3>Personaliza</h3>
+
+<p>
+Después del pago solicitaremos la información
+necesaria para configurar tu página.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+<h2>
+    Tu próximo sitio<br>
+    puede comenzar aquí.
+</h2>
+
+<p>
+    ¿No sabes cuál elegir? También podemos orientarte
+    para encontrar una opción adecuada para tu negocio.
+</p>
+
+<a
+href="https://wa.me/525533712767?text=Hola,%20me%20interesa%20cotizar%20una%20página%20web."
+class="primary-btn"
+target="_blank"
+>
+    Hablar por WhatsApp
+</a>
+
+</section>
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section class="section" id="faq">
+
+<div class="section-header">
+
+<div class="small">
+    Preguntas
+</div>
+
+<h2>
+    Antes de comenzar.
+</h2>
+
+</div>
+
+
+<div class="faq">
+
+<details>
+<summary>¿Estoy comprando exactamente la página de muestra?</summary>
+
+<p>
+La muestra funciona como referencia del diseño y funcionamiento.
+El sitio puede requerir personalización dependiendo de las necesidades
+de tu negocio. Antes de comenzar se confirmarán los detalles de tu proyecto.
+</p>
+
+</details>
+
+
+<details>
+<summary>¿Puedo modificar la información?</summary>
+
+<p>
+Sí. Después de realizar el pago se solicitarán los datos,
+textos, imágenes, información de contacto y demás elementos
+necesarios para preparar la página.
+</p>
+
+</details>
+
+
+<details>
+<summary>¿Cómo realizo el pago?</summary>
+
+<p>
+Durante la cotización podrás indicar el método de pago que prefieras.
+El método disponible y las condiciones finales se confirmarán directamente
+por WhatsApp antes de realizar cualquier pago.
+</p>
+
+</details>
+
+
+<details>
+<summary>¿Qué información necesito proporcionar?</summary>
+
+<p>
+Una vez confirmado el proyecto se solicitará la información
+necesaria para construir o personalizar el sitio, como textos,
+imágenes, datos de contacto, redes sociales, horarios, servicios
+y cualquier otro contenido necesario.
+</p>
+
+</details>
+
+
+<details>
+<summary>¿Puedo pedir una página que todavía no aparece aquí?</summary>
+
+<p>
+Sí. La colección está diseñada para crecer. Si necesitas un tipo
+de página que todavía no aparece en el catálogo, puedes solicitar
+una propuesta directamente por WhatsApp.
+</p>
+
+</details>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+    © 2026 WebStudio. Todos los derechos reservados.
+</div>
+
+<div>
+    Sitios web · Diseño · Desarrollo
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<a
+class="whatsapp"
+href="https://wa.me/525533712767?text=Hola,%20quiero%20información%20sobre%20una%20página%20web."
+target="_blank"
+aria-label="WhatsApp"
+>
+    ◉
+</a>
+
+
+<!-- =========================
+     MODAL COTIZACIÓN
+========================= -->
+
+<div class="modal" id="quoteModal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<div>
+
+<h2>Solicitar cotización</h2>
+
+<p>
+    Cuéntanos un poco sobre tu proyecto.
+</p>
+
+</div>
+
+<button class="close" onclick="closeModal()">
+    ×
+</button>
+
+</div>
+
+
+<div class="selected">
+
+<span>PÁGINA SELECCIONADA</span>
+
+<strong id="selectedWebsite">
+    —
+</strong>
+
+</div>
+
+
+<form id="quoteForm">
+
+
+<div class="form-group">
+
+<label>
+    Nombre
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="Tu nombre"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    Número para llamada
+</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="55 0000 0000"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    Número de WhatsApp
+</label>
+
+<input
+type="tel"
+id="whatsapp"
+placeholder="55 0000 0000"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    Método de pago de preferencia
+</label>
+
+<div class="payment-grid">
+
+<div class="payment-option">
+
+<input
+type="radio"
+name="payment"
+id="transferencia"
+value="Transferencia bancaria"
+required
+>
+
+<label for="transferencia">
+    Transferencia
+</label>
+
+</div>
+
+
+<div class="payment-option">
+
+<input
+type="radio"
+name="payment"
+id="tarjeta"
+value="Tarjeta"
+>
+
+<label for="tarjeta">
+    Tarjeta
+</label>
+
+</div>
+
+
+<div class="payment-option">
+
+<input
+type="radio"
+name="payment"
+id="otro"
+value="Otro"
+>
+
+<label for="otro">
+    Otro
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    ¿Quieres agregar algo?
+</label>
+
+<textarea
+id="message"
+placeholder="Ej. Quiero agregar WhatsApp, reservas, menú, redes sociales..."
+></textarea>
+
+</div>
+
+
+<div class="notice">
+
+<strong>Importante:</strong>
+
+<br>
+
+Esta solicitud es una cotización, no una compra automática.
+Después de confirmar el proyecto y realizar el pago correspondiente,
+se solicitarán los datos y materiales necesarios para configurar
+la página web seleccionada.
+
+</div>
+
+
+<button class="submit" type="submit">
+
+Enviar cotización por WhatsApp →
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CONFIGURACIÓN DE PÁGINAS
+=====================================================
+
+   AQUÍ PUEDES AGREGAR TODAS TUS PÁGINAS.
+
+   Cambia:
+
+   image = imagen de la página
+   demo  = link de la página funcionando
+   price = precio mostrado
+   etc.
+
+===================================================== */
+
+const websites = [
+
+{
+    id:1,
+    name:"Menú Digital",
+    category:"Menú Digital",
+    price:"Desde $1,499 MXN",
+    image:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85",
+    description:"Una experiencia digital moderna para restaurantes, cafeterías y negocios de alimentos.",
+    demo:"https://5amcorporation.github.io/Menu-Digital/",
+    badge:"POPULAR"
+},
+
+{
+    id:2,
+    name:"Barber Studio",
+    category:"Barbería",
+    price:"Desde $1,899 MXN",
+    image:"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=85",
+    description:"Presenta tus servicios, precios, ubicación y facilita las citas de tus clientes.",
+    demo:"https://ejemplo.com/barberia",
+    badge:"NUEVO"
+},
+
+{
+    id:3,
+    name:"Beauty Studio",
+    category:"Estética",
+    price:"Desde $1,899 MXN",
+    image:"https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85",
+    description:"Una presencia elegante para salones de belleza, estética, uñas y servicios especializados.",
+    demo:"https://ejemplo.com/estetica",
+    badge:"PREMIUM"
+},
+
+{
+    id:4,
+    name:"Doctor",
+    category:"Médicos",
+    price:"Desde $2,499 MXN",
+    image:"https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1200&q=85",
+    description:"Página profesional para médicos y especialistas con información y solicitud de citas.",
+    demo:"https://ejemplo.com/doctor",
+    badge:"PRO"
+},
+
+{
+    id:5,
+    name:"Business",
+    category:"Otros",
+    price:"Desde $1,999 MXN",
+    image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
+    description:"Una presencia digital elegante para empresas, servicios profesionales y emprendimientos.",
+    demo:"https://ejemplo.com/business",
+    badge:"NUEVO"
+},
+
+{
+    id:6,
+    name:"Próximamente",
+    category:"Otros",
+    price:"Disponible próximamente",
+    image:"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+    description:"Estamos preparando nuevos diseños para diferentes tipos de negocios.",
+    demo:"#",
+    badge:"PRÓXIMAMENTE"
+}
+
+];
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const grid = document.getElementById("webGrid");
+const modal = document.getElementById("quoteModal");
+const selectedWebsite = document.getElementById("selectedWebsite");
+
+
+/* =====================================================
+   MOSTRAR PÁGINAS
+===================================================== */
+
+function renderWebsites(category="Todos"){
+
+    grid.innerHTML="";
+
+    const filtered = category === "Todos"
+        ? websites
+        : websites.filter(site => site.category === category);
+
+    filtered.forEach(site => {
+
+        const card = document.createElement("article");
+
+        card.className="web-card";
+
+        card.innerHTML=`
+
+            <div class="preview">
+
+                <img
+                    src="${site.image}"
+                    alt="${site.name}"
+                    loading="lazy"
+                >
+
+                <div class="badge">
+                    ${site.badge}
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <div class="card-title">
+                            ${site.name}
+                        </div>
+
+                        <div class="card-category">
+                            ${site.category}
+                        </div>
+
+                    </div>
+
+                    <div class="card-price">
+                        ${site.price}
+                    </div>
+
+                </div>
+
+                <p class="card-description">
+                    ${site.description}
+                </p>
+
+                <div class="card-buttons">
+
+                    <a
+                        class="demo-btn"
+                        href="${site.demo}"
+                        target="_blank"
+                        ${site.demo === "#" ? 'onclick="return false;"' : ""}
+                    >
+                        Ver muestra ↗
+                    </a>
+
+                    <button
+                        class="quote-btn"
+                        onclick="openModal('${site.name}')"
+                    >
+                        Cotizar
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+document.querySelectorAll(".filter").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".filter")
+        .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        renderWebsites(button.dataset.filter);
+
+    });
+
+});
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(website){
+
+    selectedWebsite.textContent = website;
+
+    modal.classList.add("active");
+
+    document.body.style.overflow="hidden";
+
+}
+
+
+function closeModal(){
+
+    modal.classList.remove("active");
+
+    document.body.style.overflow="";
+
+}
+
+
+modal.addEventListener("click",function(e){
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+});
+
+
+/* =====================================================
+   FORMULARIO → WHATSAPP
+===================================================== */
+
+document.getElementById("quoteForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const whatsapp =
+        document.getElementById("whatsapp").value.trim();
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+    const message =
+        document.getElementById("message").value.trim();
+
+
+    const text = `
+
+Hola, quiero solicitar una cotización para una página web.
+
+━━━━━━━━━━━━━━━━━━
+
+🌐 PÁGINA SELECCIONADA
+${selectedWebsite.textContent}
+
+👤 NOMBRE
+${name}
+
+📞 TELÉFONO PARA LLAMADA
+${phone}
+
+💬 WHATSAPP
+${whatsapp}
+
+💳 MÉTODO DE PAGO
+${payment}
+
+📝 INFORMACIÓN ADICIONAL
+${message || "No especificada"}
+
+━━━━━━━━━━━━━━━━━━
+
+Entiendo que esta solicitud es una cotización
+y que después de confirmar el proyecto y realizar
+el pago correspondiente se solicitarán los datos
+necesarios para configurar la página.
+
+Gracias.
+    `;
+
+
+    const url =
+        "https://wa.me/525533712767?text="
+        + encodeURIComponent(text);
+
+
+    window.open(url,"_blank");
+
+});
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+renderWebsites();
+
+</script>
+
+</body>
+</html>
