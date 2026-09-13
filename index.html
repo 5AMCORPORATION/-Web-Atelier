@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
-
-<title>WEBORA — Sitios Web Premium</title>
+<meta name="description" content="Web Atelier — Diseño web premium para marcas que quieren destacar.">
+<title>Web Atelier — Diseño Web Premium</title>
 
 <style>
-
 /* =========================================================
-   WEBORA
-   PREMIUM DIGITAL SHOWROOM
+   WEB ATELIER
+   Diseño premium / oscuro / editorial / Apple-inspired
 ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+
 :root{
-    --black:#050505;
-    --black-2:#090909;
-    --black-3:#111111;
-    --white:#f5f5f7;
-    --muted:#86868b;
-    --muted-2:#5f5f63;
-    --line:rgba(255,255,255,.10);
+    --bg:#050505;
+    --bg-soft:#090909;
+    --surface:#0d0d0f;
+    --surface-2:#111113;
+    --surface-3:#171719;
+
+    --text:#f5f5f7;
+    --text-soft:#d1d1d4;
+    --muted:#8e8e93;
+
+    --line:rgba(255,255,255,.09);
     --line-soft:rgba(255,255,255,.055);
-    --green:#30d158;
-    --blue:#2997ff;
-    --radius:26px;
-    --max:1240px;
-    --nav-height:68px;
+
+    --white:#ffffff;
+    --green:#1ed760;
+
+    --radius-xl:34px;
+    --radius-lg:26px;
+    --radius-md:18px;
+
+    --shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        0 10px 35px rgba(0,0,0,.22);
+
+    --ease:cubic-bezier(.2,.75,.25,1);
 }
 
 *{
@@ -42,196 +54,215 @@ html{
 }
 
 body{
-    min-height:100vh;
+    background:
+        radial-gradient(circle at 50% -20%, rgba(255,255,255,.055), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(30,215,96,.025), transparent 30%),
+        var(--bg);
+
+    color:var(--text);
+    font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow-x:hidden;
-    background:
-        radial-gradient(
-            circle at 50% -15%,
-            rgba(255,255,255,.10),
-            transparent 34%
-        ),
-        var(--black);
-    color:var(--white);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        Inter,
-        Arial,
-        sans-serif;
-    -webkit-font-smoothing:antialiased;
+}
+
+body.modal-open{
+    overflow:hidden;
+}
+
+::selection{
+    background:#fff;
+    color:#000;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
 }
 
 /* =========================================================
-   AMBIENT BACKGROUND
+   BACKGROUND LIGHT
 ========================================================= */
 
-body::before{
-    content:"";
+.background-light{
     position:fixed;
     inset:0;
+    pointer-events:none;
     z-index:-3;
-    pointer-events:none;
-    background:
-        linear-gradient(
-            rgba(255,255,255,.014) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.014) 1px,
-            transparent 1px
-        );
-    background-size:90px 90px;
-    mask-image:linear-gradient(
-        to bottom,
-        black,
-        transparent 80%
-    );
+    overflow:hidden;
 }
 
-body::after{
-    content:"";
-    position:fixed;
-    width:500px;
-    height:500px;
+.light{
+    position:absolute;
     border-radius:50%;
-    pointer-events:none;
-    z-index:-2;
-    left:var(--mouse-x,50%);
-    top:var(--mouse-y,30%);
-    transform:translate(-50%,-50%);
-    background:rgba(255,255,255,.025);
-    filter:blur(90px);
-    transition:
-        left .8s ease,
-        top .8s ease;
+    filter:blur(100px);
+    opacity:.16;
+    animation:floatLight 14s ease-in-out infinite alternate;
+}
+
+.light.one{
+    width:420px;
+    height:420px;
+    background:#ffffff;
+    top:-260px;
+    left:15%;
+}
+
+.light.two{
+    width:300px;
+    height:300px;
+    background:#1ed760;
+    opacity:.035;
+    right:-130px;
+    top:25%;
+    animation-delay:2s;
+}
+
+.light.three{
+    width:350px;
+    height:350px;
+    background:#ffffff;
+    opacity:.035;
+    bottom:-200px;
+    left:30%;
+    animation-delay:5s;
+}
+
+@keyframes floatLight{
+    from{
+        transform:translate3d(-20px,-10px,0) scale(1);
+    }
+    to{
+        transform:translate3d(30px,25px,0) scale(1.08);
+    }
 }
 
 /* =========================================================
-   PAGE LOADER
-========================================================= */
-
-.loader{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#050505;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-}
-
-.loader.hidden{
-    opacity:0;
-    visibility:hidden;
-}
-
-.loader-logo{
-    font-size:27px;
-    font-weight:700;
-    letter-spacing:-1.5px;
-    animation:pulse 1.5s infinite;
-}
-
-.loader-logo span{
-    color:#777;
-}
-
-@keyframes pulse{
-    0%,100%{opacity:.35}
-    50%{opacity:1}
-}
-
-/* =========================================================
-   NAVIGATION
+   NAVBAR
 ========================================================= */
 
 .navbar{
     position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:var(--nav-height);
-    z-index:2000;
-
-    background:rgba(5,5,5,.68);
-
-    backdrop-filter:blur(25px) saturate(140%);
-    -webkit-backdrop-filter:blur(25px) saturate(140%);
-
-    border-bottom:1px solid rgba(255,255,255,.055);
-
-    transition:
-        background .3s,
-        box-shadow .3s;
-}
-
-.navbar.scrolled{
-    background:rgba(5,5,5,.88);
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.35);
-}
-
-.nav-inner{
-    height:100%;
-    max-width:var(--max);
-    margin:auto;
-    padding:0 24px;
+    top:16px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1160px, calc(100% - 32px));
+    height:66px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
+
+    padding:0 10px 0 22px;
+
+    background:rgba(12,12,13,.68);
+    backdrop-filter:blur(24px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:999px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.3),
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    z-index:1000;
+
+    transition:
+        background .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.navbar.scrolled{
+    background:rgba(7,7,8,.88);
+    border-color:rgba(255,255,255,.12);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 .logo{
-    color:white;
-    text-decoration:none;
-    font-size:21px;
-    font-weight:700;
-    letter-spacing:-1px;
+    font-family:Manrope, sans-serif;
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:-.04em;
 }
 
 .logo span{
-    color:#666;
+    opacity:.42;
 }
 
-.nav-center{
+.nav-links{
     display:flex;
     align-items:center;
     gap:30px;
+    margin-left:auto;
+    margin-right:28px;
 }
 
-.nav-center a{
-    color:#888;
-    text-decoration:none;
+.nav-links a{
+    position:relative;
+    color:#a7a7ab;
     font-size:13px;
-    transition:.25s;
+    font-weight:500;
+    transition:color .3s ease;
 }
 
-.nav-center a:hover{
-    color:white;
+.nav-links a:hover{
+    color:#fff;
 }
 
-.nav-button{
-    color:#000;
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-7px;
+    width:0;
+    height:1px;
     background:#fff;
-    text-decoration:none;
-    padding:10px 17px;
+    transition:width .3s ease;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-cta{
+    border:1px solid rgba(255,255,255,.12);
+    background:#fff;
+    color:#000;
+    padding:11px 18px;
     border-radius:999px;
     font-size:12px;
-    font-weight:600;
-    transition:.3s;
+    font-weight:700;
+    transition:
+        transform .3s var(--ease),
+        box-shadow .3s ease;
 }
 
-.nav-button:hover{
-    transform:translateY(-1px);
-    box-shadow:
-        0 10px 30px rgba(255,255,255,.12);
+.nav-cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(255,255,255,.13);
+}
+
+.mobile-menu{
+    display:none;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:#fff;
 }
 
 /* =========================================================
@@ -241,599 +272,622 @@ body::after{
 .hero{
     min-height:100vh;
     padding:
-        calc(var(--nav-height) + 115px)
-        24px
-        80px;
+        190px 24px
+        90px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    text-align:center;
     position:relative;
-    overflow:hidden;
 }
 
-.hero-orb{
+.hero::before{
+    content:"";
     position:absolute;
-    width:650px;
-    height:650px;
-    border-radius:50%;
+    width:800px;
+    height:500px;
+    top:5%;
+    left:50%;
+    transform:translateX(-50%);
 
     background:
         radial-gradient(
-            circle,
-            rgba(255,255,255,.085),
-            rgba(255,255,255,.018) 45%,
-            transparent 70%
+            ellipse,
+            rgba(255,255,255,.075),
+            transparent 68%
         );
 
-    filter:blur(8px);
+    filter:blur(20px);
     pointer-events:none;
-    animation:heroFloat 8s ease-in-out infinite;
-}
-
-@keyframes heroFloat{
-    0%,100%{
-        transform:translateY(0) scale(1);
-    }
-    50%{
-        transform:translateY(-25px) scale(1.04);
-    }
 }
 
 .hero-content{
-    max-width:980px;
     position:relative;
+    width:min(1000px,100%);
+    text-align:center;
     z-index:2;
 }
 
-.hero-pill{
+.hero-eyebrow{
     display:inline-flex;
     align-items:center;
-    gap:9px;
+    gap:8px;
 
-    padding:8px 14px;
+    padding:8px 13px;
+    margin-bottom:28px;
 
-    border:1px solid var(--line);
+    border:1px solid rgba(255,255,255,.08);
     background:rgba(255,255,255,.035);
 
     border-radius:999px;
 
-    color:#999;
-    font-size:12px;
+    color:#bdbdc1;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.04em;
 
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.25);
-
-    margin-bottom:28px;
-
-    animation:fadeUp .8s ease both;
+    animation:fadeUp .9s var(--ease) both;
 }
 
-.live-dot{
-    width:7px;
-    height:7px;
+.hero-eyebrow::before{
+    content:"";
+    width:6px;
+    height:6px;
     border-radius:50%;
     background:#fff;
-    box-shadow:0 0 14px #fff;
+    box-shadow:0 0 12px rgba(255,255,255,.7);
 }
 
 .hero h1{
-    font-size:clamp(58px,9vw,108px);
-    line-height:.91;
-    letter-spacing:-6px;
-    font-weight:700;
-    margin-bottom:30px;
+    max-width:930px;
+    margin:auto;
 
-    animation:fadeUp .8s .1s ease both;
+    font-family:Manrope, sans-serif;
+    font-size:clamp(58px, 9vw, 112px);
+    line-height:.91;
+    letter-spacing:-.075em;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 5%,
+            #eeeeef 45%,
+            #8e8e93 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    animation:fadeUp 1s .08s var(--ease) both;
 }
 
-.hero h1 .dim{
-    color:#666;
+.hero h1 em{
+    font-style:normal;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #a6a6aa
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
 .hero-description{
     max-width:590px;
-    margin:auto;
+    margin:30px auto 0;
 
-    color:#8b8b90;
+    color:#929297;
+    font-size:16px;
+    line-height:1.7;
 
-    font-size:17px;
-    line-height:1.65;
-
-    animation:fadeUp .8s .2s ease both;
+    animation:fadeUp 1s .16s var(--ease) both;
 }
 
 .hero-actions{
     display:flex;
-    justify-content:center;
     align-items:center;
-    gap:10px;
+    justify-content:center;
+    gap:12px;
 
-    margin-top:35px;
+    margin-top:38px;
 
-    animation:fadeUp .8s .3s ease both;
+    animation:fadeUp 1s .24s var(--ease) both;
 }
 
-.btn-primary,
-.btn-secondary{
+.btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+    gap:9px;
 
-    min-height:46px;
+    min-height:50px;
     padding:0 21px;
 
     border-radius:999px;
+    border:1px solid transparent;
 
-    text-decoration:none;
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
 
     transition:
-        transform .3s,
-        box-shadow .3s,
-        background .3s;
+        transform .35s var(--ease),
+        box-shadow .35s ease,
+        background .35s ease,
+        border-color .35s ease;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
 }
 
 .btn-primary{
+    background:#fff;
     color:#000;
-    background:white;
+
+    box-shadow:
+        0 10px 35px rgba(255,255,255,.08);
 }
 
 .btn-primary:hover{
-    transform:translateY(-3px);
     box-shadow:
-        0 18px 50px rgba(255,255,255,.13);
+        0 15px 45px rgba(255,255,255,.15);
 }
 
 .btn-secondary{
-    color:#ddd;
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--line);
+    background:rgba(255,255,255,.045);
+    border-color:rgba(255,255,255,.1);
+    color:#fff;
 }
 
 .btn-secondary:hover{
     background:rgba(255,255,255,.08);
-    transform:translateY(-3px);
 }
 
-.scroll-indicator{
+.hero-bottom{
     position:absolute;
-    bottom:30px;
+    bottom:35px;
     left:50%;
     transform:translateX(-50%);
 
-    color:#555;
+    color:#56565a;
     font-size:10px;
-    letter-spacing:2px;
+    letter-spacing:.16em;
     text-transform:uppercase;
 
     display:flex;
-    flex-direction:column;
     align-items:center;
     gap:10px;
 }
 
-.scroll-line{
-    width:1px;
-    height:35px;
-    background:linear-gradient(
-        to bottom,
-        #777,
-        transparent
-    );
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:none;
-    }
+.hero-bottom::before,
+.hero-bottom::after{
+    content:"";
+    width:35px;
+    height:1px;
+    background:rgba(255,255,255,.1);
 }
 
 /* =========================================================
-   MINI INTRO
+   GENERAL
 ========================================================= */
-
-.intro{
-    max-width:900px;
-    margin:0 auto;
-    padding:80px 24px 120px;
-    text-align:center;
-}
-
-.intro h2{
-    font-size:clamp(35px,5vw,55px);
-    line-height:1;
-    letter-spacing:-3px;
-}
-
-.intro h2 span{
-    color:#666;
-}
-
-.intro p{
-    color:#777;
-    max-width:550px;
-    margin:22px auto 0;
-    line-height:1.6;
-    font-size:14px;
-}
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
-
-.container{
-    max-width:var(--max);
-    margin:auto;
-    padding:0 24px;
-}
 
 .section{
-    padding:90px 0;
+    width:min(1160px, calc(100% - 40px));
+    margin:auto;
+    padding:120px 0;
 }
 
-.section-heading{
-    margin-bottom:42px;
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    margin-bottom:45px;
 }
 
-.kicker{
-    color:#666;
-    font-size:11px;
+.section-label{
+    color:#747478;
     text-transform:uppercase;
-    letter-spacing:2.5px;
-    margin-bottom:13px;
+    letter-spacing:.16em;
+    font-size:10px;
+    font-weight:700;
+    margin-bottom:14px;
 }
 
-.section-heading h2{
-    font-size:clamp(38px,5vw,62px);
-    line-height:1;
-    letter-spacing:-3px;
+.section-title{
+    font-family:Manrope, sans-serif;
+    font-size:clamp(35px,5vw,58px);
+    line-height:.98;
+    letter-spacing:-.055em;
 }
 
-.section-heading p{
-    max-width:500px;
-    color:#777;
-    font-size:14px;
-    line-height:1.6;
-    margin-top:15px;
+.section-description{
+    max-width:390px;
+    color:#858589;
+    font-size:13px;
+    line-height:1.65;
 }
 
 /* =========================================================
-   CATEGORY BAR
+   CATALOG CONTROLS
 ========================================================= */
 
-.category-wrap{
-    position:sticky;
-    top:var(--nav-height);
-    z-index:100;
-
-    margin-bottom:38px;
-
-    padding:8px;
-
-    border:1px solid var(--line-soft);
-    border-radius:999px;
-
-    background:rgba(12,12,12,.78);
-
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.25);
-}
-
-.categories{
+.catalog-controls{
     display:flex;
-    gap:5px;
-    overflow-x:auto;
-    scrollbar-width:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+
+    margin-bottom:30px;
 }
 
-.categories::-webkit-scrollbar{
-    display:none;
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
 }
 
-.category{
-    flex:0 0 auto;
+.filter{
+    padding:9px 15px;
 
-    border:0;
-    background:transparent;
-
-    color:#777;
-
-    padding:10px 17px;
-
+    border:1px solid var(--line);
     border-radius:999px;
 
-    font-family:inherit;
-    font-size:12px;
+    background:rgba(255,255,255,.025);
+    color:#88888d;
 
-    cursor:pointer;
+    font-size:11px;
+    font-weight:600;
 
-    transition:.3s;
+    transition:
+        .3s ease;
 }
 
-.category:hover{
-    color:white;
+.filter:hover{
+    color:#fff;
+    border-color:rgba(255,255,255,.18);
 }
 
-.category.active{
+.filter.active{
+    background:#fff;
     color:#000;
-    background:white;
+    border-color:#fff;
+}
+
+.search-box{
+    position:relative;
+    width:220px;
+}
+
+.search-box input{
+    width:100%;
+    height:40px;
+
+    padding:0 15px 0 38px;
+
+    border-radius:999px;
+    border:1px solid var(--line);
+
+    outline:none;
+
+    background:rgba(255,255,255,.025);
+    color:#fff;
+
+    font-size:11px;
+
+    transition:.3s ease;
+}
+
+.search-box input:focus{
+    border-color:rgba(255,255,255,.22);
+    background:rgba(255,255,255,.05);
+}
+
+.search-icon{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#777;
+    pointer-events:none;
 }
 
 /* =========================================================
-   WEBSITE GRID
+   CARDS
 ========================================================= */
 
 .web-grid{
     display:grid;
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
-    gap:22px;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
-
-/* =========================================================
-   WEBSITE CARD
-========================================================= */
 
 .web-card{
     position:relative;
-
     overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            #111,
-            #080808
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
         );
 
-    border:1px solid var(--line-soft);
-
-    border-radius:var(--radius);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:var(--radius-lg);
 
     box-shadow:
-        0 20px 70px rgba(0,0,0,.25);
+        0 20px 60px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    transform:translateY(25px);
+    opacity:0;
 
     transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
-        border .4s,
-        box-shadow .5s;
-
-    opacity:0;
-    transform:translateY(25px);
+        transform .8s var(--ease),
+        opacity .8s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
 }
 
 .web-card.visible{
     opacity:1;
-    transform:none;
+    transform:translateY(0);
 }
 
 .web-card:hover{
     transform:translateY(-7px);
-
-    border-color:
-        rgba(255,255,255,.16);
+    border-color:rgba(255,255,255,.15);
 
     box-shadow:
-        0 35px 100px rgba(0,0,0,.5),
-        0 0 60px rgba(255,255,255,.025);
+        0 35px 90px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
+.card-light{
+    position:absolute;
+    width:170px;
+    height:170px;
+    top:-100px;
+    right:-70px;
 
-.preview{
+    background:rgba(255,255,255,.08);
+    filter:blur(55px);
+    opacity:0;
+
+    transition:opacity .5s ease;
+    pointer-events:none;
+}
+
+.web-card:hover .card-light{
+    opacity:1;
+}
+
+.card-image{
     position:relative;
-    aspect-ratio:16/10;
+    height:240px;
     overflow:hidden;
+
     background:#111;
 }
 
-.preview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-
-    transition:
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-.web-card:hover .preview img{
-    transform:scale(1.055);
-}
-
-.preview::after{
+.card-image::after{
     content:"";
     position:absolute;
     inset:0;
 
     background:
         linear-gradient(
-            to bottom,
-            transparent 55%,
-            rgba(0,0,0,.65)
+            180deg,
+            transparent 45%,
+            rgba(0,0,0,.52) 100%
         );
 
     pointer-events:none;
 }
 
-.preview-glow{
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:50%;
+.card-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 
-    right:-70px;
-    top:-70px;
+    display:block;
 
-    background:rgba(255,255,255,.10);
-    filter:blur(50px);
-
-    opacity:.4;
+    transition:
+        transform .9s var(--ease),
+        filter .6s ease;
 }
 
-.badge{
+.web-card:hover .card-image img{
+    transform:scale(1.045);
+    filter:brightness(1.06);
+}
+
+.card-badge{
     position:absolute;
-    z-index:3;
+    top:15px;
+    left:15px;
+    z-index:2;
 
-    top:17px;
-    left:17px;
+    padding:7px 10px;
 
-    padding:7px 11px;
-
-    border-radius:999px;
-
-    color:#ddd;
-
-    background:rgba(0,0,0,.55);
-
-    border:1px solid rgba(255,255,255,.12);
-
+    background:rgba(0,0,0,.58);
     backdrop-filter:blur(15px);
     -webkit-backdrop-filter:blur(15px);
 
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:999px;
+
     font-size:9px;
-    letter-spacing:1px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
 }
 
-/* =========================================================
-   CARD CONTENT
-========================================================= */
+.card-preview{
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    z-index:3;
+
+    width:39px;
+    height:39px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    opacity:0;
+    transform:translateY(8px);
+
+    transition:.35s var(--ease);
+}
+
+.web-card:hover .card-preview{
+    opacity:1;
+    transform:translateY(0);
+}
 
 .card-content{
-    padding:23px;
+    padding:22px;
 }
 
-.card-meta{
+.card-top{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
-    gap:20px;
+    gap:15px;
+    align-items:start;
 }
 
 .card-name{
-    font-size:23px;
-    letter-spacing:-1px;
+    font-family:Manrope, sans-serif;
+    font-size:19px;
+    letter-spacing:-.035em;
 }
 
 .card-category{
-    color:#666;
-    font-size:11px;
     margin-top:6px;
+    color:#77777c;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
 }
 
 .card-price{
-    color:#ddd;
-    font-size:12px;
     white-space:nowrap;
+    color:#aaa;
+    font-size:11px;
 }
 
 .card-description{
-    color:#777;
-    font-size:13px;
-    line-height:1.55;
-    margin:17px 0 20px;
+    margin-top:18px;
+    min-height:42px;
+
+    color:#77777c;
+    font-size:12px;
+    line-height:1.6;
 }
 
 .card-actions{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:8px;
+
+    margin-top:22px;
 }
 
-.demo-button,
-.quote-button{
-    min-height:42px;
-
-    border-radius:12px;
+.card-btn{
+    height:42px;
 
     display:flex;
     align-items:center;
     justify-content:center;
+    gap:7px;
 
-    font-family:inherit;
-    font-size:12px;
-    font-weight:600;
+    border-radius:12px;
 
-    cursor:pointer;
-    text-decoration:none;
+    font-size:11px;
+    font-weight:700;
 
-    transition:.3s;
+    transition:.3s ease;
 }
 
-.demo-button{
-    color:#ddd;
-    background:#151515;
+.card-btn.demo{
     border:1px solid var(--line);
+    background:rgba(255,255,255,.025);
+    color:#fff;
 }
 
-.demo-button:hover{
-    background:#202020;
-}
-
-.quote-button{
-    color:#000;
+.card-btn.quote{
     background:#fff;
-    border:0;
+    color:#000;
 }
 
-.quote-button:hover{
+.card-btn:hover{
     transform:translateY(-2px);
-    box-shadow:
-        0 12px 35px rgba(255,255,255,.12);
+}
+
+.card-btn.demo:hover{
+    background:rgba(255,255,255,.07);
 }
 
 /* =========================================================
    EMPTY STATE
 ========================================================= */
 
-.empty{
-    grid-column:1/-1;
+.empty-state{
+    display:none;
     padding:70px 20px;
     text-align:center;
-    border:1px dashed var(--line);
-    border-radius:var(--radius);
-    color:#666;
+
+    border:1px dashed rgba(255,255,255,.1);
+    border-radius:var(--radius-lg);
+
+    color:#777;
+}
+
+.empty-state.show{
+    display:block;
+}
+
+.empty-state strong{
+    display:block;
+    color:#fff;
+    margin-bottom:8px;
 }
 
 /* =========================================================
-   FEATURE STRIP
+   FEATURES
 ========================================================= */
 
-.feature-strip{
-    margin-top:25px;
-
+.features{
     display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
 
-    border:1px solid var(--line-soft);
-    border-radius:var(--radius);
-    overflow:hidden;
-
-    background:#0a0a0a;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
 }
 
 .feature{
-    padding:30px;
+    padding:36px 25px;
+
     border-right:1px solid var(--line-soft);
-    transition:.35s;
+
+    transition:
+        background .35s ease;
 }
 
 .feature:last-child{
@@ -841,29 +895,34 @@ body::after{
 }
 
 .feature:hover{
-    background:#0e0e0e;
-}
-
-.feature-number{
-    color:#444;
-    font-size:10px;
-    letter-spacing:2px;
-    margin-bottom:25px;
+    background:rgba(255,255,255,.025);
 }
 
 .feature-icon{
-    font-size:23px;
+    width:38px;
+    height:38px;
+
+    display:grid;
+    place-items:center;
+
     margin-bottom:20px;
+
+    border:1px solid var(--line);
+    border-radius:12px;
+
+    background:rgba(255,255,255,.025);
+    color:#fff;
 }
 
 .feature h3{
-    font-size:17px;
+    font-family:Manrope, sans-serif;
+    font-size:15px;
     margin-bottom:8px;
 }
 
 .feature p{
-    color:#707070;
-    font-size:12px;
+    color:#707075;
+    font-size:11px;
     line-height:1.6;
 }
 
@@ -871,111 +930,92 @@ body::after{
    PROCESS
 ========================================================= */
 
-.process-grid{
+.process{
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
-    gap:15px;
-}
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
 
-.process-card{
-    position:relative;
+    background:var(--line);
 
-    min-height:230px;
-
-    padding:25px;
-
-    border:1px solid var(--line-soft);
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #101010,
-            #080808
-        );
-
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
     overflow:hidden;
-
-    transition:.4s;
 }
 
-.process-card:hover{
-    transform:translateY(-5px);
-    border-color:rgba(255,255,255,.13);
+.process-item{
+    position:relative;
+    padding:40px 32px;
+    background:var(--bg);
+
+    transition:background .35s ease;
+}
+
+.process-item:hover{
+    background:#0c0c0e;
 }
 
 .process-number{
-    color:#444;
-    font-size:11px;
-    letter-spacing:2px;
+    color:#55555a;
+    font-size:10px;
+    letter-spacing:.14em;
+    margin-bottom:55px;
 }
 
-.process-card h3{
-    margin-top:70px;
-    font-size:19px;
-    letter-spacing:-.5px;
+.process-item h3{
+    font-family:Manrope, sans-serif;
+    font-size:22px;
+    letter-spacing:-.04em;
+    margin-bottom:10px;
 }
 
-.process-card p{
-    margin-top:10px;
-    color:#707070;
+.process-item p{
+    color:#707075;
     font-size:12px;
-    line-height:1.6;
-}
-
-.process-light{
-    position:absolute;
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    right:-60px;
-    top:-60px;
-    background:rgba(255,255,255,.06);
-    filter:blur(35px);
+    line-height:1.7;
+    max-width:260px;
 }
 
 /* =========================================================
-   PREMIUM CTA
+   CTA
 ========================================================= */
 
 .cta{
-    margin:100px 0;
-
     position:relative;
     overflow:hidden;
 
-    padding:90px 30px;
-
-    text-align:center;
+    padding:100px 40px;
 
     border:1px solid var(--line);
-
-    border-radius:38px;
+    border-radius:var(--radius-xl);
 
     background:
         radial-gradient(
             circle at 50% 0%,
-            rgba(255,255,255,.13),
-            transparent 48%
+            rgba(255,255,255,.09),
+            transparent 55%
         ),
-        #0b0b0b;
+        linear-gradient(
+            145deg,
+            #101011,
+            #080809
+        );
 
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.45);
+    box-shadow:var(--shadow);
+
+    text-align:center;
 }
 
 .cta::before{
     content:"";
     position:absolute;
     width:400px;
-    height:400px;
-    border-radius:50%;
+    height:200px;
     left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    background:rgba(255,255,255,.025);
-    filter:blur(60px);
+    top:-100px;
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.1);
+    filter:blur(90px);
 }
 
 .cta-content{
@@ -984,21 +1024,42 @@ body::after{
 }
 
 .cta h2{
-    font-size:clamp(42px,6vw,72px);
+    font-family:Manrope, sans-serif;
+    font-size:clamp(38px,6vw,70px);
     line-height:.95;
-    letter-spacing:-4px;
-}
-
-.cta h2 span{
-    color:#666;
+    letter-spacing:-.065em;
 }
 
 .cta p{
-    max-width:500px;
+    max-width:470px;
     margin:20px auto 30px;
-    color:#777;
-    font-size:14px;
-    line-height:1.6;
+
+    color:#77777c;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:14px 20px;
+
+    border-radius:999px;
+
+    background:#fff;
+    color:#000;
+
+    font-size:12px;
+    font-weight:700;
+
+    transition:.35s var(--ease);
+}
+
+.whatsapp-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 45px rgba(255,255,255,.12);
 }
 
 /* =========================================================
@@ -1010,46 +1071,52 @@ body::after{
     margin:auto;
 }
 
-details{
-    border-bottom:1px solid var(--line-soft);
+.faq details{
+    border-top:1px solid var(--line);
 }
 
-summary{
+.faq details:last-child{
+    border-bottom:1px solid var(--line);
+}
+
+.faq summary{
     list-style:none;
     cursor:pointer;
 
-    padding:24px 0;
-
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:20px;
+    align-items:center;
 
+    padding:24px 4px;
+
+    font-family:Manrope, sans-serif;
     font-size:15px;
 }
 
-summary::-webkit-details-marker{
+.faq summary::-webkit-details-marker{
     display:none;
 }
 
-summary::after{
-    content:"+";
-    color:#555;
+.faq summary span{
+    color:#666;
     font-size:20px;
     font-weight:300;
-    transition:.3s;
+
+    transition:.3s ease;
 }
 
-details[open] summary::after{
-    content:"−";
-    color:#aaa;
+.faq details[open] summary span{
+    transform:rotate(45deg);
 }
 
-details p{
-    color:#707070;
-    font-size:13px;
-    line-height:1.7;
-    padding:0 50px 23px 0;
+.faq-answer{
+    max-width:680px;
+
+    padding:0 4px 25px;
+
+    color:#707075;
+    font-size:12px;
+    line-height:1.8;
 }
 
 /* =========================================================
@@ -1057,72 +1124,67 @@ details p{
 ========================================================= */
 
 footer{
-    border-top:1px solid var(--line-soft);
-    padding:45px 0;
-}
+    width:min(1160px, calc(100% - 40px));
+    margin:auto;
 
-.footer{
+    padding:40px 0 50px;
+
+    border-top:1px solid var(--line);
+
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     gap:20px;
+
+    color:#5e5e63;
+    font-size:10px;
 }
 
 .footer-logo{
+    color:#aaa;
+    font-family:Manrope, sans-serif;
     font-weight:700;
-    font-size:17px;
 }
 
-.footer-logo span{
-    color:#666;
+.footer-links{
+    display:flex;
+    gap:20px;
 }
 
-.footer-text{
-    color:#555;
-    font-size:11px;
+.footer-links a:hover{
+    color:#fff;
 }
 
 /* =========================================================
-   FLOATING WHATSAPP
+   WHATSAPP FLOAT
 ========================================================= */
 
-.whatsapp{
+.whatsapp-float{
     position:fixed;
-
     right:22px;
     bottom:22px;
+    z-index:900;
 
-    width:55px;
-    height:55px;
+    width:53px;
+    height:53px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:grid;
+    place-items:center;
 
     border-radius:50%;
 
-    background:#20c76a;
-    color:white;
-
-    text-decoration:none;
-
-    z-index:1500;
+    background:#fff;
+    color:#000;
 
     box-shadow:
-        0 15px 45px rgba(32,199,106,.25);
+        0 15px 40px rgba(0,0,0,.4),
+        0 0 0 1px rgba(255,255,255,.12);
 
-    transition:.35s;
+    transition:.35s var(--ease);
 }
 
-.whatsapp:hover{
-    transform:scale(1.08);
-    box-shadow:
-        0 20px 55px rgba(32,199,106,.35);
-}
-
-.whatsapp-icon{
-    width:22px;
-    height:22px;
+.whatsapp-float:hover{
+    transform:translateY(-5px) scale(1.04);
 }
 
 /* =========================================================
@@ -1132,188 +1194,207 @@ footer{
 .modal{
     position:fixed;
     inset:0;
+    z-index:2000;
 
-    z-index:5000;
-
-    display:flex;
+    display:none;
     align-items:center;
     justify-content:center;
 
     padding:20px;
 
     background:rgba(0,0,0,.72);
-
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
     opacity:0;
-    visibility:hidden;
-
-    transition:.35s;
+    transition:opacity .35s ease;
 }
 
-.modal.active{
+.modal.open{
+    display:flex;
     opacity:1;
-    visibility:visible;
 }
 
 .modal-box{
-    width:100%;
-    max-width:540px;
-    max-height:92vh;
+    width:min(560px,100%);
+    max-height:90vh;
+    overflow:auto;
 
-    overflow-y:auto;
+    position:relative;
 
-    padding:28px;
-
-    border-radius:28px;
-
-    border:1px solid rgba(255,255,255,.10);
+    padding:30px;
 
     background:
         linear-gradient(
             145deg,
-            #141414,
-            #0a0a0a
+            rgba(25,25,27,.97),
+            rgba(9,9,10,.98)
         );
 
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:28px;
+
     box-shadow:
-        0 50px 150px rgba(0,0,0,.8);
+        0 40px 120px rgba(0,0,0,.7),
+        inset 0 1px 0 rgba(255,255,255,.04);
 
-    transform:translateY(20px) scale(.97);
-
-    transition:.4s;
+    transform:scale(.96) translateY(15px);
+    transition:transform .45s var(--ease);
 }
 
-.modal.active .modal-box{
-    transform:none;
+.modal.open .modal-box{
+    transform:scale(1) translateY(0);
 }
 
-.modal-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
+.modal-close{
+    position:absolute;
+    right:18px;
+    top:18px;
 
-    margin-bottom:24px;
-}
-
-.modal-title{
-    font-size:27px;
-    letter-spacing:-1.3px;
-}
-
-.modal-subtitle{
-    color:#666;
-    font-size:12px;
-    margin-top:6px;
-}
-
-.close-modal{
     width:38px;
     height:38px;
+
+    display:grid;
+    place-items:center;
 
     border:1px solid var(--line);
     border-radius:50%;
 
-    background:#181818;
-    color:#aaa;
-
-    cursor:pointer;
+    background:rgba(255,255,255,.04);
+    color:#fff;
 
     font-size:18px;
 
-    transition:.3s;
+    transition:.3s ease;
 }
 
-.close-modal:hover{
-    color:white;
-    background:#222;
+.modal-close:hover{
+    background:#fff;
+    color:#000;
 }
 
-.selected-site{
-    display:flex;
-    align-items:center;
-    gap:13px;
-
-    padding:14px;
-
-    margin-bottom:20px;
-
-    border-radius:15px;
-
-    background:#151515;
-    border:1px solid var(--line-soft);
-}
-
-.selected-icon{
-    width:38px;
-    height:38px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:11px;
-
-    background:#202020;
-}
-
-.selected-label{
-    color:#555;
+.modal-label{
+    color:#737378;
     font-size:9px;
     text-transform:uppercase;
-    letter-spacing:1.5px;
+    letter-spacing:.16em;
+    font-weight:700;
+    margin-bottom:10px;
 }
 
-.selected-name{
-    color:#ddd;
-    font-size:14px;
-    margin-top:3px;
+.modal-title{
+    font-family:Manrope, sans-serif;
+    font-size:31px;
+    letter-spacing:-.05em;
+    margin-bottom:8px;
+}
+
+.modal-subtitle{
+    color:#747478;
+    font-size:11px;
+    line-height:1.6;
+    margin-bottom:24px;
+}
+
+.selected-page{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    padding:14px 16px;
+
+    border:1px solid var(--line);
+    border-radius:15px;
+
+    background:rgba(255,255,255,.025);
+
+    margin-bottom:20px;
+}
+
+.selected-page strong{
+    display:block;
+    font-size:12px;
+}
+
+.selected-page span{
+    display:block;
+    color:#6f6f74;
+    font-size:9px;
+    margin-top:4px;
+}
+
+.selected-price{
+    color:#aaa;
+    font-size:10px;
+    white-space:nowrap;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .form-group{
-    margin-bottom:16px;
+    margin-bottom:12px;
 }
 
-.form-label{
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
     display:block;
-    color:#999;
-    font-size:11px;
     margin-bottom:7px;
+
+    color:#8a8a8f;
+    font-size:10px;
+    font-weight:600;
 }
 
-.input,
-.textarea{
+.form-group input,
+.form-group textarea{
     width:100%;
 
-    border:1px solid var(--line-soft);
-
-    background:#080808;
-    color:white;
-
-    border-radius:12px;
-
-    padding:13px 14px;
-
-    font-family:inherit;
-    font-size:13px;
+    border:1px solid var(--line);
+    border-radius:13px;
 
     outline:none;
 
-    transition:.3s;
+    background:rgba(255,255,255,.035);
+    color:#fff;
+
+    padding:12px 13px;
+
+    font-size:11px;
+
+    transition:.3s ease;
 }
 
-.input:focus,
-.textarea:focus{
-    border-color:rgba(255,255,255,.28);
+.form-group input{
+    height:44px;
+}
+
+.form-group textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:rgba(255,255,255,.25);
+    background:rgba(255,255,255,.055);
 
     box-shadow:
-        0 0 0 3px rgba(255,255,255,.035);
+        0 0 0 3px rgba(255,255,255,.025);
 }
 
-.textarea{
-    min-height:85px;
-    resize:vertical;
+.payment-title{
+    color:#8a8a8f;
+    font-size:10px;
+    font-weight:600;
+    margin-bottom:8px;
 }
 
 .payment-options{
@@ -1322,157 +1403,252 @@ footer{
     gap:7px;
 }
 
-.payment{
+.payment-option{
     position:relative;
 }
 
-.payment input{
+.payment-option input{
     position:absolute;
     opacity:0;
 }
 
-.payment label{
-    min-height:52px;
-
+.payment-option label{
     display:flex;
     align-items:center;
     justify-content:center;
 
-    text-align:center;
+    min-height:42px;
 
     padding:8px;
 
+    border:1px solid var(--line);
     border-radius:11px;
 
-    border:1px solid var(--line-soft);
+    color:#777;
+    background:rgba(255,255,255,.025);
 
-    background:#080808;
+    font-size:9px;
+    font-weight:600;
 
-    color:#666;
-
-    font-size:11px;
+    text-align:center;
 
     cursor:pointer;
-
-    transition:.3s;
+    transition:.3s ease;
 }
 
-.payment input:checked + label{
-    background:#181818;
-    border-color:rgba(255,255,255,.4);
-    color:white;
+.payment-option input:checked + label{
+    color:#000;
+    background:#fff;
+    border-color:#fff;
 }
 
-.notice{
-    padding:13px;
+.quote-notice{
+    margin:16px 0;
 
-    margin:18px 0;
+    padding:12px 14px;
 
-    border-radius:13px;
-
-    border:1px solid var(--line-soft);
+    border-left:2px solid rgba(255,255,255,.35);
 
     background:rgba(255,255,255,.025);
 
-    color:#666;
-
-    font-size:10px;
-    line-height:1.6;
+    color:#77777c;
+    font-size:9px;
+    line-height:1.7;
 }
 
-.notice strong{
-    color:#aaa;
-}
-
-.submit-button{
+.submit-quote{
     width:100%;
+    height:48px;
 
     border:0;
-
-    min-height:49px;
-
     border-radius:13px;
 
-    background:white;
-    color:black;
+    background:#fff;
+    color:#000;
 
-    font-family:inherit;
-    font-size:13px;
-    font-weight:700;
+    font-size:11px;
+    font-weight:800;
 
-    cursor:pointer;
-
-    transition:.3s;
+    transition:.35s var(--ease);
 }
 
-.submit-button:hover{
+.submit-quote:hover{
     transform:translateY(-2px);
+    box-shadow:0 12px 35px rgba(255,255,255,.1);
+}
 
-    box-shadow:
-        0 15px 40px rgba(255,255,255,.12);
+.modal-footer-note{
+    margin-top:10px;
+    text-align:center;
+
+    color:#55555a;
+    font-size:8px;
 }
 
 /* =========================================================
-   TOAST
+   ANIMATIONS
 ========================================================= */
 
-.toast{
-    position:fixed;
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(22px);
+    }
 
-    left:50%;
-    bottom:30px;
-
-    transform:
-        translate(-50%,20px);
-
-    z-index:6000;
-
-    padding:13px 18px;
-
-    border-radius:999px;
-
-    background:#181818;
-
-    border:1px solid var(--line);
-
-    color:#ddd;
-
-    font-size:12px;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.35s;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.toast.show{
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:
+        opacity .8s ease,
+        transform .8s var(--ease);
+}
+
+.reveal.visible{
     opacity:1;
-    visibility:visible;
-    transform:translate(-50%,0);
+    transform:translateY(0);
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:900px){
 
-    .nav-center{
+    .web-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature:nth-child(2){
+        border-right:0;
+    }
+
+    .feature:nth-child(-n+2){
+        border-bottom:1px solid var(--line-soft);
+    }
+
+    .process{
+        grid-template-columns:1fr;
+    }
+
+    .process-item{
+        border-bottom:1px solid var(--line);
+    }
+
+    .process-item:last-child{
+        border-bottom:0;
+    }
+}
+
+@media(max-width:700px){
+
+    .navbar{
+        height:60px;
+        padding-left:18px;
+    }
+
+    .nav-links,
+    .nav-cta{
         display:none;
+    }
+
+    .mobile-menu{
+        display:grid;
+        place-items:center;
+    }
+
+    .nav-links.mobile-open{
+        position:absolute;
+        top:68px;
+        left:0;
+        right:0;
+
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+
+        padding:10px;
+
+        background:rgba(10,10,11,.95);
+        backdrop-filter:blur(25px);
+
+        border:1px solid var(--line);
+        border-radius:22px;
+    }
+
+    .nav-links.mobile-open a{
+        padding:14px;
+        border-radius:12px;
+    }
+
+    .nav-links.mobile-open a:hover{
+        background:rgba(255,255,255,.05);
+    }
+
+    .hero{
+        min-height:90vh;
+        padding:150px 20px 100px;
+    }
+
+    .hero h1{
+        font-size:clamp(54px,15vw,85px);
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+    }
+
+    .hero-actions .btn{
+        width:100%;
+        max-width:280px;
+    }
+
+    .section{
+        width:min(100% - 28px, 1160px);
+        padding:85px 0;
+    }
+
+    .section-header{
+        display:block;
+    }
+
+    .section-description{
+        margin-top:18px;
+    }
+
+    .catalog-controls{
+        display:block;
+    }
+
+    .search-box{
+        width:100%;
+        margin-top:14px;
     }
 
     .web-grid{
         grid-template-columns:1fr;
+        gap:15px;
     }
 
-    .process-grid{
-        grid-template-columns:1fr 1fr;
+    .card-image{
+        height:230px;
     }
 
-    .feature-strip{
+    .features{
         grid-template-columns:1fr;
     }
 
@@ -1485,102 +1661,26 @@ footer{
         border-bottom:0;
     }
 
-}
-
-@media(max-width:600px){
-
-    :root{
-        --nav-height:61px;
+    .cta{
+        padding:75px 20px;
+        border-radius:26px;
     }
 
-    .nav-inner{
-        padding:0 17px;
-    }
-
-    .nav-button{
-        padding:9px 14px;
-    }
-
-    .hero{
-        padding:
-            calc(var(--nav-height) + 90px)
-            20px
-            90px;
-    }
-
-    .hero h1{
-        font-size:57px;
-        letter-spacing:-4px;
-    }
-
-    .hero-description{
-        font-size:15px;
-    }
-
-    .hero-actions{
+    footer{
         flex-direction:column;
+        align-items:flex-start;
     }
 
-    .btn-primary,
-    .btn-secondary{
-        width:100%;
-        max-width:260px;
+    .footer-links{
+        flex-wrap:wrap;
     }
 
-    .section{
-        padding:65px 0;
-    }
-
-    .container{
-        padding:0 17px;
-    }
-
-    .section-heading{
-        margin-bottom:30px;
-    }
-
-    .category-wrap{
-        margin-left:-5px;
-        margin-right:-5px;
-    }
-
-    .card-content{
-        padding:19px;
-    }
-
-    .card-name{
-        font-size:21px;
-    }
-
-    .card-description{
-        font-size:12px;
-    }
-
-    .process-grid{
+    .form-grid{
         grid-template-columns:1fr;
     }
 
-    .process-card{
-        min-height:190px;
-    }
-
-    .process-card h3{
-        margin-top:45px;
-    }
-
-    .cta{
-        margin:60px 0;
-        padding:65px 20px;
-        border-radius:28px;
-    }
-
-    .cta h2{
-        letter-spacing:-3px;
-    }
-
-    .footer{
-        flex-direction:column;
-        align-items:flex-start;
+    .form-group.full{
+        grid-column:auto;
     }
 
     .payment-options{
@@ -1588,313 +1688,225 @@ footer{
     }
 
     .modal{
-        padding:12px;
+        padding:10px;
     }
 
     .modal-box{
-        padding:22px;
-        border-radius:24px;
-    }
-
-    .whatsapp{
-        right:17px;
-        bottom:17px;
+        padding:24px 18px;
+        border-radius:23px;
     }
 }
-
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
-        transition-duration:.01ms !important;
-    }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
 
-<!-- =====================================================
-     LOADER
-===================================================== -->
-
-<div class="loader" id="loader">
-
-    <div class="loader-logo">
-        WEB<span>ORA.</span>
-    </div>
-
+<div class="background-light">
+    <div class="light one"></div>
+    <div class="light two"></div>
+    <div class="light three"></div>
 </div>
 
 
-<!-- =====================================================
-     NAV
-===================================================== -->
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-<nav class="navbar" id="navbar">
+<header class="navbar" id="navbar">
 
-    <div class="nav-inner">
+    <a href="#" class="logo">
+        Web Atelier<span>.</span>
+    </a>
 
-        <a href="#" class="logo">
-            WEB<span>ORA.</span>
-        </a>
+    <nav class="nav-links" id="navLinks">
+        <a href="#catalogo">Colección</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">FAQ</a>
+    </nav>
 
-        <div class="nav-center">
+    <button class="nav-cta" onclick="openQuote('')">
+        Cotizar
+    </button>
 
-            <a href="#sitios">Sitios</a>
-            <a href="#proceso">Proceso</a>
-            <a href="#faq">Preguntas</a>
-
-        </div>
-
-        <a href="#sitios" class="nav-button">
-            Explorar
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<header class="hero">
-
-    <div class="hero-orb"></div>
-
-    <div class="hero-content">
-
-        <div class="hero-pill">
-
-            <span class="live-dot"></span>
-
-            Sitios web para negocios
-
-        </div>
-
-
-        <h1>
-
-            Una mejor forma<br>
-
-            <span class="dim">
-                de estar en internet.
-            </span>
-
-        </h1>
-
-
-        <p class="hero-description">
-
-            Explora diseños creados para distintos negocios.
-            Encuentra el tuyo, mira cómo funciona y solicita
-            una cotización.
-
-        </p>
-
-
-        <div class="hero-actions">
-
-            <a
-                href="#sitios"
-                class="btn-primary"
-            >
-                Explorar sitios
-                <span>↓</span>
-            </a>
-
-
-            <a
-                href="#proceso"
-                class="btn-secondary"
-            >
-                Cómo funciona
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="scroll-indicator">
-
-        Explorar
-
-        <span class="scroll-line"></span>
-
-    </div>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">
+        ☰
+    </button>
 
 </header>
 
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-<section class="intro">
+<section class="hero">
 
-    <h2>
+    <div class="hero-content">
 
-        No necesitas empezar<br>
+        <div class="hero-eyebrow">
+            Web Atelier
+        </div>
 
-        <span>desde cero.</span>
+        <h1>
+            Una nueva forma<br>
+            de <em>estar en internet.</em>
+        </h1>
 
-    </h2>
+        <p class="hero-description">
+            Diseños web cuidadosamente creados para marcas que
+            quieren verse diferentes.
+        </p>
 
-    <p>
+        <div class="hero-actions">
 
-        Elige una experiencia, visualízala y
-        hagámosla tuya.
+            <a href="#catalogo" class="btn btn-primary">
+                Explorar colección
+                <span>↓</span>
+            </a>
 
-    </p>
+            <button class="btn btn-secondary" onclick="openQuote('')">
+                Hablar con nosotros
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-bottom">
+        Diseño · Tecnología · Identidad
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     SITIOS
-===================================================== -->
+<!-- =========================================================
+     CATALOGO
+========================================================= -->
 
-<section class="section" id="sitios">
+<section class="section" id="catalogo">
 
-<div class="container">
+    <div class="section-header reveal">
 
+        <div>
+            <div class="section-label">
+                Colección
+            </div>
 
-    <div class="section-heading">
-
-        <div class="kicker">
-            Colección
+            <h2 class="section-title">
+                Elige tu<br>punto de partida.
+            </h2>
         </div>
 
-        <h2>
-            Elige tu sitio.
-        </h2>
-
-        <p>
-            Diseños listos para diferentes tipos de negocios.
+        <p class="section-description">
+            Explora nuestras propuestas y encuentra el estilo
+            que mejor representa tu proyecto.
         </p>
 
     </div>
 
 
-    <!-- CATEGORÍAS -->
+    <div class="catalog-controls reveal">
 
-    <div class="category-wrap">
+        <div class="filters">
 
-        <div class="categories">
-
-            <button
-                class="category active"
-                data-category="Todos"
-            >
+            <button class="filter active" data-filter="Todos">
                 Todos
             </button>
 
-            <button
-                class="category"
-                data-category="Menú Digital"
-            >
-                Menú
+            <button class="filter" data-filter="Menú Digital">
+                Menú Digital
             </button>
 
-            <button
-                class="category"
-                data-category="Barbería"
-            >
+            <button class="filter" data-filter="Barbería">
                 Barbería
             </button>
 
-            <button
-                class="category"
-                data-category="Estética"
-            >
+            <button class="filter" data-filter="Estética">
                 Estética
             </button>
 
-            <button
-                class="category"
-                data-category="Médicos"
-            >
+            <button class="filter" data-filter="Médicos">
                 Médicos
             </button>
 
-            <button
-                class="category"
-                data-category="Otros"
-            >
+            <button class="filter" data-filter="Otros">
                 Otros
             </button>
 
         </div>
 
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Buscar diseño..."
+            >
+
+        </div>
+
     </div>
 
 
-    <!-- GALERÍA -->
+    <div class="web-grid" id="webGrid"></div>
 
-    <div
-        class="web-grid"
-        id="webGrid"
-    ></div>
+    <div class="empty-state" id="emptyState">
+
+        <strong>
+            No encontramos ese diseño.
+        </strong>
+
+        Prueba con otra búsqueda o categoría.
+
+    </div>
+
+</section>
 
 
-    <!-- BENEFICIOS -->
+<!-- =========================================================
+     FEATURES
+========================================================= -->
 
-    <div class="feature-strip">
+<section class="section reveal">
+
+    <div class="features">
 
         <div class="feature">
-
-            <div class="feature-number">
-                01
-            </div>
 
             <div class="feature-icon">
                 ✦
             </div>
 
-            <h3>
-                Diseño premium
-            </h3>
+            <h3>Diseño premium</h3>
 
             <p>
-                Interfaces limpias, modernas y pensadas
-                para transmitir confianza.
+                Interfaces limpias, modernas y cuidadosamente
+                construidas.
             </p>
 
         </div>
 
 
         <div class="feature">
-
-            <div class="feature-number">
-                02
-            </div>
 
             <div class="feature-icon">
                 ◇
             </div>
 
-            <h3>
-                Adaptable
-            </h3>
+            <h3>Responsive</h3>
 
             <p>
-                La experiencia puede personalizarse
-                para tu negocio.
+                Una experiencia diseñada para teléfono,
+                tablet y computadora.
             </p>
 
         </div>
@@ -1902,237 +1914,195 @@ footer{
 
         <div class="feature">
 
-            <div class="feature-number">
-                03
-            </div>
-
             <div class="feature-icon">
                 ↗
             </div>
 
-            <h3>
-                Pensado para convertir
-            </h3>
+            <h3>WhatsApp</h3>
 
             <p>
-                Contacto, WhatsApp, llamadas y acciones
-                importantes siempre al alcance.
+                Conecta directamente con tus clientes desde
+                tu sitio.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ∞
+            </div>
+
+            <h3>A tu medida</h3>
+
+            <p>
+                Podemos adaptar el diseño a las necesidades
+                de tu proyecto.
             </p>
 
         </div>
 
     </div>
 
-</div>
-
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      PROCESO
-===================================================== -->
+========================================================= -->
 
 <section class="section" id="proceso">
 
-<div class="container">
+    <div class="section-header reveal">
 
+        <div>
+            <div class="section-label">
+                Proceso
+            </div>
 
-    <div class="section-heading">
-
-        <div class="kicker">
-            Simple
+            <h2 class="section-title">
+                Simple por<br>diseño.
+            </h2>
         </div>
 
-        <h2>
-            Así funciona.
-        </h2>
+        <p class="section-description">
+            Sin procesos complicados. Tú eliges el diseño;
+            nosotros nos encargamos del resto.
+        </p>
 
     </div>
 
 
-    <div class="process-grid">
+    <div class="process reveal">
 
-
-        <div class="process-card">
-
-            <div class="process-light"></div>
+        <div class="process-item">
 
             <div class="process-number">
-                01
+                01 — EXPLORA
             </div>
 
             <h3>
-                Explora
+                Encuentra tu estilo.
             </h3>
 
             <p>
-                Encuentra un diseño que te guste.
+                Revisa nuestra colección y elige una propuesta
+                que te guste.
             </p>
 
         </div>
 
 
-        <div class="process-card">
-
-            <div class="process-light"></div>
+        <div class="process-item">
 
             <div class="process-number">
-                02
+                02 — COTIZA
             </div>
 
             <h3>
-                Visualiza
+                Cuéntanos tu idea.
             </h3>
 
             <p>
-                Abre la muestra y conoce la experiencia.
+                Envíanos tus datos y te contactaremos para
+                confirmar los detalles.
             </p>
 
         </div>
 
 
-        <div class="process-card">
-
-            <div class="process-light"></div>
+        <div class="process-item">
 
             <div class="process-number">
-                03
+                03 — CREA
             </div>
 
             <h3>
-                Cotiza
+                Hagámoslo realidad.
             </h3>
 
             <p>
-                Envía tus datos directamente por WhatsApp.
+                Una vez confirmado el proyecto y realizado
+                el pago, comenzamos.
             </p>
 
         </div>
-
-
-        <div class="process-card">
-
-            <div class="process-light"></div>
-
-            <div class="process-number">
-                04
-            </div>
-
-            <h3>
-                Personaliza
-            </h3>
-
-            <p>
-                Después del pago recopilamos la información
-                necesaria para tu sitio.
-            </p>
-
-        </div>
-
 
     </div>
-
-</div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      CTA
-===================================================== -->
+========================================================= -->
 
 <section class="section">
 
-<div class="container">
-
-    <div class="cta">
+    <div class="cta reveal">
 
         <div class="cta-content">
 
             <h2>
-
-                ¿No sabes cuál elegir?
-
-                <br>
-
-                <span>Hablemos.</span>
-
+                ¿No sabes<br>cuál elegir?
             </h2>
 
             <p>
-                Cuéntanos qué tipo de negocio tienes
-                y te ayudaremos a encontrar una opción.
+                Cuéntanos qué necesitas y te ayudamos a
+                encontrar la mejor opción.
             </p>
 
-            <a
-                href="https://wa.me/525533712767?text=Hola%20WEBORA,%20quiero%20ayuda%20para%20elegir%20una%20página%20web."
-                target="_blank"
-                class="btn-primary"
+            <button
+                class="whatsapp-btn"
+                onclick="openQuote('')"
             >
-                Hablar por WhatsApp →
-            </a>
+                Hablar por WhatsApp
+                <span>↗</span>
+            </button>
 
         </div>
 
     </div>
-
-</div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      FAQ
-===================================================== -->
+========================================================= -->
 
 <section class="section" id="faq">
 
-<div class="container">
+    <div class="section-header reveal">
 
+        <div>
+            <div class="section-label">
+                Información
+            </div>
 
-    <div class="section-heading">
-
-        <div class="kicker">
-            FAQ
+            <h2 class="section-title">
+                Preguntas<br>frecuentes.
+            </h2>
         </div>
-
-        <h2>
-            Preguntas.
-        </h2>
 
     </div>
 
 
-    <div class="faq">
-
-
-        <details>
-
-            <summary>
-                ¿La página de muestra se puede modificar?
-            </summary>
-
-            <p>
-                Sí. La muestra sirve como punto de partida.
-                El contenido, imágenes, información, colores
-                y diferentes elementos pueden adaptarse al negocio.
-            </p>
-
-        </details>
-
+    <div class="faq reveal">
 
         <details>
 
             <summary>
                 ¿La cotización es una compra?
+                <span>+</span>
             </summary>
 
-            <p>
-                No. El formulario solamente envía una solicitud
-                de cotización por WhatsApp. Antes de realizar
-                cualquier pago se confirmarán el precio,
-                alcance y condiciones del proyecto.
-            </p>
+            <div class="faq-answer">
+                No. El formulario únicamente envía una solicitud
+                de cotización. Antes de comenzar confirmaremos
+                contigo el proyecto, precio y condiciones.
+            </div>
 
         </details>
 
@@ -2140,15 +2110,15 @@ footer{
         <details>
 
             <summary>
-                ¿Qué sucede después del pago?
+                ¿Qué pasa después de pagar?
+                <span>+</span>
             </summary>
 
-            <p>
-                Una vez confirmado el proyecto y realizado
-                el pago correspondiente, se solicitarán los
-                textos, imágenes, datos de contacto y demás
-                información necesaria para preparar el sitio.
-            </p>
+            <div class="faq-answer">
+                Una vez confirmado el proyecto y realizado el
+                pago, te solicitaremos la información y materiales
+                necesarios para comenzar a trabajar en tu página.
+            </div>
 
         </details>
 
@@ -2156,14 +2126,15 @@ footer{
         <details>
 
             <summary>
-                ¿Puedo solicitar otro tipo de página?
+                ¿Puedo personalizar una plantilla?
+                <span>+</span>
             </summary>
 
-            <p>
-                Sí. La colección irá creciendo y también puedes
-                solicitar una propuesta para un tipo de negocio
-                que todavía no aparezca en el catálogo.
-            </p>
+            <div class="faq-answer">
+                Sí. Las propuestas funcionan como punto de partida.
+                Podemos adaptar colores, textos, imágenes, secciones
+                y funciones según el proyecto.
+            </div>
 
         </details>
 
@@ -2171,500 +2142,432 @@ footer{
         <details>
 
             <summary>
-                ¿Qué métodos de pago manejan?
+                ¿Las páginas funcionan en celular?
+                <span>+</span>
             </summary>
 
-            <p>
-                Puedes indicar tu método de preferencia durante
-                la solicitud. El método disponible y las
-                condiciones se confirmarán directamente por WhatsApp.
-            </p>
+            <div class="faq-answer">
+                Sí. Los diseños están pensados para ofrecer una
+                experiencia correcta en teléfonos, tablets y
+                computadoras.
+            </div>
 
         </details>
-
 
     </div>
-
-</div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-===================================================== -->
+========================================================= -->
 
 <footer>
 
-<div class="container">
-
-    <div class="footer">
-
+    <div>
         <div class="footer-logo">
-            WEB<span>ORA.</span>
+            Web Atelier.
         </div>
 
-        <div class="footer-text">
-            Sitios web · Diseño digital · 2026
+        <div style="margin-top:7px;">
+            Diseño digital con intención.
         </div>
-
     </div>
 
-</div>
+    <div class="footer-links">
+        <a href="#catalogo">Colección</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" onclick="openQuote(''); return false;">
+            Cotizar
+        </a>
+    </div>
 
 </footer>
 
 
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
+<!-- =========================================================
+     WHATSAPP FLOAT
+========================================================= -->
 
 <a
-    href="https://wa.me/525533712767?text=Hola%20WEBORA,%20quiero%20información%20sobre%20una%20página%20web."
+    class="whatsapp-float"
+    href="https://wa.me/525533712767"
     target="_blank"
-    class="whatsapp"
-    aria-label="WhatsApp"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
 >
-
     <svg
-        class="whatsapp-icon"
+        width="22"
+        height="22"
         viewBox="0 0 24 24"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        stroke="currentColor"
+        stroke-width="1.8"
     >
-
-        <path
-            d="M20.5 3.5C18.3 1.3 15.4.1 12.3.1
-            5.9.1.7 5.3.7 11.7c0 2 .5 4 1.5 5.7L.6 23.9
-            l6.7-1.6c1.6.9 3.4 1.3 5.1 1.3
-            6.4 0 11.6-5.2 11.6-11.6
-            0-3.1-1.2-6-3.5-8.5Z"
-            fill="white"
-        />
-
-        <path
-            d="M17.5 13.9c-.3-.2-1.8-.9-2.1-1
-            -.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2
-            -.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.6
-            -.9-.8-1.6-1.8-1.8-2.1
-            -.2-.3 0-.5.2-.7
-            .2-.2.3-.3.5-.5
-            .2-.2.2-.3.3-.6
-            .1-.2 0-.4-.1-.6
-            -.1-.2-.7-1.7-1-2.3
-            -.3-.6-.5-.5-.7-.5h-.6
-            c-.2 0-.6.1-.9.4
-            -.3.3-1.1 1.1-1.1 2.6
-            s1.1 3 1.3 3.2
-            c.2.2 2.2 3.4 5.3 4.7
-            .7.3 1.3.5 1.8.6
-            .8.2 1.5.2 2.1.1
-            .6-.1 1.8-.7 2-1.4
-            .2-.7.2-1.3.1-1.4
-            -.1-.1-.3-.2-.6-.4Z"
-            fill="#20C76A"
-        />
-
+        <path d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3.5 20l1.2-4.1A8.5 8.5 0 1 1 20.5 11.5Z"/>
+        <path d="M8.4 8.1c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.5.6c-.2.2-.2.4-.1.6.4.8 1 1.4 1.8 1.8.2.1.4.1.6-.1l.6-.6c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.5-1.7.4-1.1-.2-2.4-.9-3.6-2.1-1.2-1.2-1.9-2.5-2.1-3.6-.1-.6.1-1.2.4-1.7Z"/>
     </svg>
-
 </a>
 
 
-<!-- =====================================================
-     MODAL
-===================================================== -->
+<!-- =========================================================
+     QUOTE MODAL
+========================================================= -->
 
-<div
-    class="modal"
-    id="quoteModal"
-    role="dialog"
-    aria-modal="true"
->
+<div class="modal" id="quoteModal">
 
-<div class="modal-box">
-
-
-    <div class="modal-top">
-
-        <div>
-
-            <div class="modal-title">
-                Cotizar sitio
-            </div>
-
-            <div class="modal-subtitle">
-                Solo necesitamos algunos datos.
-            </div>
-
-        </div>
-
+    <div class="modal-box">
 
         <button
-            class="close-modal"
-            id="closeModal"
+            class="modal-close"
+            onclick="closeQuote()"
             aria-label="Cerrar"
         >
             ×
         </button>
 
-    </div>
 
-
-    <!-- SITIO SELECCIONADO -->
-
-    <div class="selected-site">
-
-        <div class="selected-icon">
-            ✦
+        <div class="modal-label">
+            Web Atelier
         </div>
 
-        <div>
+        <h2 class="modal-title">
+            Solicitar cotización.
+        </h2>
 
-            <div class="selected-label">
-                Seleccionaste
+        <p class="modal-subtitle">
+            Envíanos tus datos. Te contactaremos por WhatsApp
+            para confirmar los detalles.
+        </p>
+
+
+        <!-- SELECTED WEBSITE -->
+
+        <div class="selected-page">
+
+            <div>
+
+                <strong id="selectedName">
+                    Proyecto personalizado
+                </strong>
+
+                <span id="selectedCategory">
+                    Selección abierta
+                </span>
+
             </div>
 
             <div
-                class="selected-name"
-                id="selectedName"
+                class="selected-price"
+                id="selectedPrice"
             >
-                —
+                A cotizar
             </div>
 
         </div>
 
-    </div>
 
+        <!-- FORM -->
 
-    <!-- FORMULARIO -->
+        <form id="quoteForm">
 
-    <form id="quoteForm">
+            <div class="form-grid">
 
+                <div class="form-group">
 
-        <div class="form-group">
-
-            <label class="form-label">
-                Nombre
-            </label>
-
-            <input
-                class="input"
-                type="text"
-                id="clientName"
-                placeholder="Tu nombre"
-                required
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label class="form-label">
-                Teléfono para llamada
-            </label>
-
-            <input
-                class="input"
-                type="tel"
-                id="clientPhone"
-                placeholder="55 0000 0000"
-                required
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label class="form-label">
-                WhatsApp
-            </label>
-
-            <input
-                class="input"
-                type="tel"
-                id="clientWhatsapp"
-                placeholder="55 0000 0000"
-                required
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label class="form-label">
-                Método de pago preferido
-            </label>
-
-
-            <div class="payment-options">
-
-
-                <div class="payment">
+                    <label for="name">
+                        Nombre
+                    </label>
 
                     <input
-                        type="radio"
-                        id="payTransfer"
-                        name="payment"
-                        value="Transferencia bancaria"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Tu nombre"
                         required
                     >
 
-                    <label for="payTransfer">
-                        Transferencia
-                    </label>
-
                 </div>
 
 
-                <div class="payment">
+                <div class="form-group">
+
+                    <label for="phone">
+                        Teléfono para llamada
+                    </label>
 
                     <input
-                        type="radio"
-                        id="payCard"
-                        name="payment"
-                        value="Tarjeta"
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="55 0000 0000"
+                        required
                     >
-
-                    <label for="payCard">
-                        Tarjeta
-                    </label>
 
                 </div>
 
 
-                <div class="payment">
+                <div class="form-group">
+
+                    <label for="whatsapp">
+                        WhatsApp
+                    </label>
 
                     <input
-                        type="radio"
-                        id="payOther"
-                        name="payment"
-                        value="Otro"
+                        type="tel"
+                        id="whatsapp"
+                        name="whatsapp"
+                        placeholder="Si es diferente"
                     >
-
-                    <label for="payOther">
-                        Otro
-                    </label>
 
                 </div>
 
+
+                <div class="form-group">
+
+                    <label for="contact">
+                        Preferencia de contacto
+                    </label>
+
+                    <select
+                        id="contact"
+                        name="contact"
+                        style="
+                            width:100%;
+                            height:44px;
+                            padding:0 13px;
+                            border-radius:13px;
+                            border:1px solid var(--line);
+                            outline:none;
+                            background:rgba(255,255,255,.035);
+                            color:#fff;
+                            font-size:11px;
+                        "
+                    >
+                        <option value="WhatsApp">
+                            WhatsApp
+                        </option>
+
+                        <option value="Llamada">
+                            Llamada
+                        </option>
+
+                        <option value="WhatsApp y llamada">
+                            WhatsApp y llamada
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <div class="payment-title">
+                        Método de pago preferido
+                    </div>
+
+                    <div class="payment-options">
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="transfer"
+                                name="payment"
+                                value="Transferencia bancaria"
+                                checked
+                            >
+
+                            <label for="transfer">
+                                Transferencia
+                            </label>
+
+                        </div>
+
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="card"
+                                name="payment"
+                                value="Tarjeta"
+                            >
+
+                            <label for="card">
+                                Tarjeta
+                            </label>
+
+                        </div>
+
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="other"
+                                name="payment"
+                                value="Otro"
+                            >
+
+                            <label for="other">
+                                Otro
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="message">
+                        Información adicional
+                        <span style="color:#555;">
+                            · opcional
+                        </span>
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Cuéntanos brevemente qué necesitas..."
+                    ></textarea>
+
+                </div>
 
             </div>
 
-        </div>
+
+            <div class="quote-notice">
+
+                Esta solicitud <strong>no representa una compra</strong>.
+                Primero confirmaremos contigo el proyecto, precio y
+                condiciones. Después del pago solicitaremos los datos,
+                textos, imágenes y materiales necesarios para desarrollar
+                la página.
+
+            </div>
 
 
-        <div class="form-group">
-
-            <label class="form-label">
-                Algo más que quieras agregar
-            </label>
-
-            <textarea
-                class="textarea"
-                id="clientMessage"
-                placeholder="Ej. Quiero WhatsApp, citas, menú, redes sociales..."
-            ></textarea>
-
-        </div>
+            <button
+                type="submit"
+                class="submit-quote"
+            >
+                Enviar solicitud por WhatsApp ↗
+            </button>
 
 
-        <div class="notice">
+            <div class="modal-footer-note">
+                Tu solicitud se abrirá directamente en WhatsApp.
+            </div>
 
-            <strong>Solicitud de cotización.</strong>
+        </form>
 
-            No se realizará ningún cobro desde este formulario.
-            El proyecto, precio, alcance y método de pago se
-            confirmarán por WhatsApp antes de realizar el pago.
-
-            Después del pago se solicitará la información necesaria
-            para configurar la página seleccionada.
-
-        </div>
-
-
-        <button
-            type="submit"
-            class="submit-button"
-        >
-            Enviar a WhatsApp →
-        </button>
-
-
-    </form>
+    </div>
 
 </div>
 
-</div>
-
-
-<!-- =====================================================
-     TOAST
-===================================================== -->
-
-<div
-    class="toast"
-    id="toast"
->
-    Selecciona una página para continuar.
-</div>
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script>
 
 /* =========================================================
    CONFIGURACIÓN
-=========================================================
-
-   AQUÍ AGREGAS TUS PÁGINAS.
-
-   image:
-   imagen que aparecerá en la tarjeta.
-
-   demo:
-   página real que abrirá "Ver muestra".
-
-   price:
-   precio inicial que quieres mostrar.
-
 ========================================================= */
+
+const WHATSAPP_NUMBER = "525533712767";
+
+
+/*
+    AQUÍ PUEDES AGREGAR TODAS TUS PÁGINAS.
+
+    image:
+    Coloca aquí la ruta de la imagen que tú vas a subir.
+
+    demo:
+    Coloca aquí el enlace real de la página.
+
+    price:
+    Precio mostrado en la tarjeta.
+
+*/
 
 const websites = [
 
     {
-        id:1,
-
-        name:"Menú Digital",
-
-        category:"Menú Digital",
-
-        price:"Desde $1,499 MXN",
-
-        image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Menú Digital",
+        category: "Menú Digital",
+        price: "Desde $1,499 MXN",
+        badge: "Popular",
+        image: "assets/menu-digital.webp",
         description:
-        "Una experiencia digital elegante para restaurantes, cafeterías y negocios de alimentos.",
-
+            "Una experiencia digital elegante para restaurantes y negocios de alimentos.",
         demo:
-        "https://5amcorporation.github.io/Menu-Digital/",
-
-        badge:"POPULAR"
+            "https://5amcorporation.github.io/Menu-Digital/"
     },
 
-
     {
-        id:2,
-
-        name:"Barber Studio",
-
-        category:"Barbería",
-
-        price:"Desde $1,899 MXN",
-
-        image:
-        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Barber Studio",
+        category: "Barbería",
+        price: "Desde $1,899 MXN",
+        badge: "Nuevo",
+        image: "assets/barberia.webp",
         description:
-        "Presenta tus servicios y facilita que tus clientes contacten o soliciten una cita.",
-
+            "Una presencia moderna para barberías que quieren destacar.",
         demo:
-        "https://ejemplo.com/barberia",
-
-        badge:"NUEVO"
+            "https://ejemplo.com/barberia"
     },
 
-
     {
-        id:3,
-
-        name:"Beauty Studio",
-
-        category:"Estética",
-
-        price:"Desde $1,899 MXN",
-
-        image:
-        "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Beauty Studio",
+        category: "Estética",
+        price: "Desde $1,899 MXN",
+        badge: "Premium",
+        image: "assets/estetica.webp",
         description:
-        "Una presencia elegante para salones de belleza, estética, uñas y servicios especializados.",
-
+            "Diseño visual y sofisticado para belleza y cuidado personal.",
         demo:
-        "https://ejemplo.com/estetica",
-
-        badge:"PREMIUM"
+            "https://ejemplo.com/estetica"
     },
 
-
     {
-        id:4,
-
-        name:"Doctor",
-
-        category:"Médicos",
-
-        price:"Desde $2,499 MXN",
-
-        image:
-        "https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Medical",
+        category: "Médicos",
+        price: "Desde $2,499 MXN",
+        badge: "Pro",
+        image: "assets/medico.webp",
         description:
-        "Una página profesional para médicos y especialistas con información y contacto.",
-
+            "Una presentación profesional para médicos y especialistas.",
         demo:
-        "https://ejemplo.com/doctor",
-
-        badge:"PRO"
+            "https://ejemplo.com/doctor"
     },
 
-
     {
-        id:5,
-
-        name:"Business",
-
-        category:"Otros",
-
-        price:"Desde $1,999 MXN",
-
-        image:
-        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Business",
+        category: "Otros",
+        price: "Desde $1,999 MXN",
+        badge: "Nuevo",
+        image: "assets/business.webp",
         description:
-        "Una presencia digital moderna para empresas, servicios profesionales y emprendimientos.",
-
+            "Una base elegante para marcas, servicios y proyectos.",
         demo:
-        "https://ejemplo.com/business",
-
-        badge:"NUEVO"
+            "https://ejemplo.com/business"
     },
 
-
     {
-        id:6,
-
-        name:"Próximamente",
-
-        category:"Otros",
-
-        price:"Próximamente",
-
-        image:
-        "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=90",
-
+        name: "Próximamente",
+        category: "Otros",
+        price: "Próximamente",
+        badge: "Próximamente",
+        image: "assets/proximamente.webp",
         description:
-        "Nuevas experiencias digitales llegarán próximamente.",
-
-        demo:"#",
-
-        badge:"PRÓXIMAMENTE"
+            "Una nueva propuesta está por llegar a Web Atelier.",
+        demo:
+            "#"
     }
 
 ];
@@ -2674,82 +2577,132 @@ const websites = [
    ELEMENTOS
 ========================================================= */
 
-const grid =
-    document.getElementById("webGrid");
+const webGrid = document.getElementById("webGrid");
+const emptyState = document.getElementById("emptyState");
+const searchInput = document.getElementById("searchInput");
+const filters = document.querySelectorAll(".filter");
 
-const modal =
-    document.getElementById("quoteModal");
+let currentFilter = "Todos";
 
-const selectedName =
-    document.getElementById("selectedName");
 
-const quoteForm =
-    document.getElementById("quoteForm");
+/* =========================================================
+   ICONO DE FLECHA
+========================================================= */
 
-let selectedWebsite = null;
+const arrowIcon = `
+<svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+>
+    <path d="M7 17 17 7"/>
+    <path d="M8 7h9v9"/>
+</svg>
+`;
 
 
 /* =========================================================
    RENDER
 ========================================================= */
 
-function renderWebsites(category = "Todos"){
+function renderWebsites(){
 
-    grid.innerHTML = "";
+    const search =
+        searchInput.value
+        .toLowerCase()
+        .trim();
 
     const filtered =
-        category === "Todos"
-        ? websites
-        : websites.filter(
-            site => site.category === category
-        );
+        websites.filter(site => {
+
+            const matchesCategory =
+                currentFilter === "Todos" ||
+                site.category === currentFilter;
+
+            const matchesSearch =
+                site.name
+                    .toLowerCase()
+                    .includes(search)
+                ||
+                site.category
+                    .toLowerCase()
+                    .includes(search);
+
+            return matchesCategory && matchesSearch;
+
+        });
 
 
-    if(!filtered.length){
+    webGrid.innerHTML = "";
 
-        grid.innerHTML = `
-            <div class="empty">
-                No hay sitios disponibles en esta categoría.
-            </div>
-        `;
+
+    if(filtered.length === 0){
+
+        emptyState.classList.add("show");
 
         return;
+
     }
 
 
-    filtered.forEach((site,index)=>{
+    emptyState.classList.remove("show");
+
+
+    filtered.forEach((site,index) => {
 
         const card =
             document.createElement("article");
 
         card.className = "web-card";
 
-        card.style.transitionDelay =
-            `${index * 70}ms`;
-
-
         card.innerHTML = `
 
-            <div class="preview">
+            <div class="card-light"></div>
+
+            <div class="card-image">
 
                 <img
                     src="${site.image}"
                     alt="${site.name}"
                     loading="lazy"
+                    onerror="
+                        this.style.opacity='0';
+                        this.parentElement.style.background=
+                        'linear-gradient(135deg,#18181a,#070707)';
+                    "
                 >
 
-                <div class="preview-glow"></div>
-
-                <div class="badge">
+                <div class="card-badge">
                     ${site.badge}
                 </div>
+
+                ${
+                    site.demo !== "#"
+                    ?
+                    `
+                    <a
+                        href="${site.demo}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card-preview"
+                        aria-label="Ver muestra"
+                    >
+                        ${arrowIcon}
+                    </a>
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
 
             <div class="card-content">
 
-                <div class="card-meta">
+                <div class="card-top">
 
                     <div>
 
@@ -2762,7 +2715,6 @@ function renderWebsites(category = "Todos"){
                         </div>
 
                     </div>
-
 
                     <div class="card-price">
                         ${site.price}
@@ -2778,27 +2730,39 @@ function renderWebsites(category = "Todos"){
 
                 <div class="card-actions">
 
-
-                    <a
-                        class="demo-button"
-                        href="${site.demo}"
-                        target="_blank"
-                        rel="noopener"
-                        ${site.demo === "#"
-                            ? 'onclick="return false;"'
-                            : ""}
-                    >
-                        Ver muestra ↗
-                    </a>
+                    ${
+                        site.demo !== "#"
+                        ?
+                        `
+                        <a
+                            href="${site.demo}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="card-btn demo"
+                        >
+                            Ver muestra
+                            ${arrowIcon}
+                        </a>
+                        `
+                        :
+                        `
+                        <div
+                            class="card-btn demo"
+                            style="opacity:.45;cursor:default;"
+                        >
+                            Próximamente
+                        </div>
+                        `
+                    }
 
 
                     <button
-                        class="quote-button"
-                        data-id="${site.id}"
+                        class="card-btn quote"
+                        onclick='openQuote(${JSON.stringify(site)})'
                     >
                         Cotizar
+                        ${arrowIcon}
                     </button>
-
 
                 </div>
 
@@ -2806,24 +2770,13 @@ function renderWebsites(category = "Todos"){
 
         `;
 
+        webGrid.appendChild(card);
 
-        grid.appendChild(card);
-
-
-        /* BOTÓN COTIZAR */
-
-        card
-        .querySelector(".quote-button")
-        .addEventListener("click",()=>{
-
-            openQuote(site);
-
-        });
+        setTimeout(() => {
+            card.classList.add("visible");
+        }, index * 70);
 
     });
-
-
-    observeCards();
 
 }
 
@@ -2832,68 +2785,117 @@ function renderWebsites(category = "Todos"){
    FILTROS
 ========================================================= */
 
-document
-.querySelectorAll(".category")
-.forEach(button=>{
+filters.forEach(filter => {
 
-    button.addEventListener("click",()=>{
+    filter.addEventListener("click", () => {
 
-        document
-        .querySelectorAll(".category")
-        .forEach(item=>{
-            item.classList.remove("active");
-        });
-
-
-        button.classList.add("active");
-
-
-        renderWebsites(
-            button.dataset.category
+        filters.forEach(item =>
+            item.classList.remove("active")
         );
+
+        filter.classList.add("active");
+
+        currentFilter =
+            filter.dataset.filter;
+
+        renderWebsites();
 
     });
 
 });
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderWebsites
+);
 
 
 /* =========================================================
    MODAL
 ========================================================= */
 
+const quoteModal =
+    document.getElementById("quoteModal");
+
+const selectedName =
+    document.getElementById("selectedName");
+
+const selectedCategory =
+    document.getElementById("selectedCategory");
+
+const selectedPrice =
+    document.getElementById("selectedPrice");
+
+let selectedWebsite = null;
+
+
 function openQuote(site){
 
-    selectedWebsite = site;
+    selectedWebsite =
+        typeof site === "object"
+        ? site
+        : null;
 
-    selectedName.textContent =
-        site.name;
 
-    modal.classList.add("active");
+    if(selectedWebsite){
 
-    document.body.style.overflow =
-        "hidden";
+        selectedName.textContent =
+            selectedWebsite.name;
+
+        selectedCategory.textContent =
+            selectedWebsite.category;
+
+        selectedPrice.textContent =
+            selectedWebsite.price;
+
+    }else{
+
+        selectedName.textContent =
+            "Proyecto personalizado";
+
+        selectedCategory.textContent =
+            "Selección abierta";
+
+        selectedPrice.textContent =
+            "A cotizar";
+
+    }
+
+
+    quoteModal.classList.add("open");
+
+    document.body.classList.add("modal-open");
+
+    setTimeout(() => {
+
+        document.getElementById("name").focus();
+
+    },350);
 
 }
 
 
 function closeQuote(){
 
-    modal.classList.remove("active");
+    quoteModal.classList.remove("open");
 
-    document.body.style.overflow =
-        "";
+    document.body.classList.remove("modal-open");
 
 }
 
 
-document
-.getElementById("closeModal")
-.addEventListener("click",closeQuote);
+/* =========================================================
+   CERRAR MODAL
+========================================================= */
 
+quoteModal.addEventListener("click", e => {
 
-modal.addEventListener("click",(event)=>{
-
-    if(event.target === modal){
+    if(e.target === quoteModal){
 
         closeQuote();
 
@@ -2902,9 +2904,9 @@ modal.addEventListener("click",(event)=>{
 });
 
 
-document.addEventListener("keydown",(event)=>{
+document.addEventListener("keydown", e => {
 
-    if(event.key === "Escape"){
+    if(e.key === "Escape"){
 
         closeQuote();
 
@@ -2914,170 +2916,140 @@ document.addEventListener("keydown",(event)=>{
 
 
 /* =========================================================
-   FORM → WHATSAPP
+   FORMULARIO → WHATSAPP
 ========================================================= */
 
-quoteForm.addEventListener(
-    "submit",
-    function(event){
+document
+    .getElementById("quoteForm")
+    .addEventListener("submit", function(e){
 
-        event.preventDefault();
-
-
-        if(!selectedWebsite){
-
-            showToast(
-                "Selecciona una página primero."
-            );
-
-            return;
-
-        }
+        e.preventDefault();
 
 
         const name =
-            document
-            .getElementById("clientName")
-            .value
-            .trim();
-
+            document.getElementById("name")
+                .value.trim();
 
         const phone =
-            document
-            .getElementById("clientPhone")
-            .value
-            .trim();
-
+            document.getElementById("phone")
+                .value.trim();
 
         const whatsapp =
-            document
-            .getElementById("clientWhatsapp")
-            .value
-            .trim();
+            document.getElementById("whatsapp")
+                .value.trim();
 
+        const contact =
+            document.getElementById("contact")
+                .value;
 
-        const paymentElement =
+        const payment =
             document.querySelector(
                 'input[name="payment"]:checked'
+            ).value;
+
+        const message =
+            document.getElementById("message")
+                .value.trim();
+
+
+        const pageName =
+            selectedWebsite
+            ? selectedWebsite.name
+            : "Proyecto personalizado";
+
+        const category =
+            selectedWebsite
+            ? selectedWebsite.category
+            : "Por definir";
+
+        const price =
+            selectedWebsite
+            ? selectedWebsite.price
+            : "Por cotizar";
+
+
+        let whatsappMessage =
+
+`Hola, Web Atelier.
+
+Quiero solicitar una cotización.
+
+━━━━━━━━━━━━━━━━
+PROYECTO
+━━━━━━━━━━━━━━━━
+
+Página:
+${pageName}
+
+Categoría:
+${category}
+
+Precio mostrado:
+${price}
+
+━━━━━━━━━━━━━━━━
+MIS DATOS
+━━━━━━━━━━━━━━━━
+
+Nombre:
+${name}
+
+Teléfono:
+${phone}
+
+WhatsApp:
+${whatsapp || "Mismo número"}
+
+Preferencia de contacto:
+${contact}
+
+Método de pago preferido:
+${payment}
+
+━━━━━━━━━━━━━━━━
+INFORMACIÓN ADICIONAL
+━━━━━━━━━━━━━━━━
+
+${message || "Sin información adicional."}
+
+━━━━━━━━━━━━━━━━
+
+Entiendo que esta solicitud NO representa una compra.
+Deseo recibir información y confirmar el proyecto,
+precio y condiciones antes de realizar el pago.`;
+
+
+        const url =
+            `https://wa.me/${WHATSAPP_NUMBER}?text=`
+            +
+            encodeURIComponent(
+                whatsappMessage
             );
 
 
-        const payment =
-            paymentElement
-            ? paymentElement.value
-            : "No especificado";
-
-
-        const message =
-            document
-            .getElementById("clientMessage")
-            .value
-            .trim();
-
-
-        const text = `Hola WEBORA, quiero solicitar una cotización.
-
-━━━━━━━━━━━━━━━━━━
-
-🌐 SITIO SELECCIONADO
-${selectedWebsite.name}
-
-📂 CATEGORÍA
-${selectedWebsite.category}
-
-💰 PRECIO MOSTRADO
-${selectedWebsite.price}
-
-👤 NOMBRE
-${name}
-
-📞 TELÉFONO
-${phone}
-
-💬 WHATSAPP
-${whatsapp}
-
-💳 MÉTODO DE PAGO
-${payment}
-
-📝 INFORMACIÓN ADICIONAL
-${message || "Sin información adicional"}
-
-━━━━━━━━━━━━━━━━━━
-
-Entiendo que esto es una solicitud de cotización
-y que antes de realizar cualquier pago se confirmarán
-el precio, alcance y condiciones del proyecto.
-
-Después del pago se solicitarán los datos necesarios
-para configurar la página web seleccionada.`;
-
-
-        const whatsappURL =
-            "https://wa.me/525533712767?text="
-            + encodeURIComponent(text);
-
-
         window.open(
-            whatsappURL,
-            "_blank"
+            url,
+            "_blank",
+            "noopener,noreferrer"
         );
 
-
-        closeQuote();
-
-    }
-);
+    });
 
 
 /* =========================================================
-   SCROLL NAV
+   NAVBAR SCROLL
 ========================================================= */
 
 const navbar =
     document.getElementById("navbar");
 
-
 window.addEventListener(
     "scroll",
-    ()=>{
+    () => {
 
-        if(window.scrollY > 20){
-
-            navbar.classList.add("scrolled");
-
-        }else{
-
-            navbar.classList.remove("scrolled");
-
-        }
-
-    },
-    {passive:true}
-);
-
-
-/* =========================================================
-   MOUSE LIGHT
-========================================================= */
-
-document.addEventListener(
-    "mousemove",
-    (event)=>{
-
-        document.documentElement
-        .style
-        .setProperty(
-            "--mouse-x",
-            `${event.clientX}px`
-        );
-
-
-        document.documentElement
-        .style
-        .setProperty(
-            "--mouse-y",
-            `${event.clientY}px`
+        navbar.classList.toggle(
+            "scrolled",
+            window.scrollY > 30
         );
 
     },
@@ -3086,110 +3058,80 @@ document.addEventListener(
 
 
 /* =========================================================
-   REVEAL CARDS
+   MOBILE MENU
 ========================================================= */
 
-let observer;
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const navLinks =
+    document.getElementById("navLinks");
+
+mobileMenu.addEventListener("click", () => {
+
+    navLinks.classList.toggle(
+        "mobile-open"
+    );
+
+});
 
 
-function observeCards(){
+navLinks
+    .querySelectorAll("a")
+    .forEach(link => {
 
-    if(observer){
-        observer.disconnect();
-    }
+        link.addEventListener("click", () => {
 
+            navLinks.classList.remove(
+                "mobile-open"
+            );
 
-    observer =
-        new IntersectionObserver(
-            entries=>{
-
-                entries.forEach(entry=>{
-
-                    if(entry.isIntersecting){
-
-                        entry.target
-                        .classList
-                        .add("visible");
-
-                        observer
-                        .unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-            {
-                threshold:.12
-            }
-        );
-
-
-    document
-    .querySelectorAll(".web-card")
-    .forEach(card=>{
-
-        observer.observe(card);
+        });
 
     });
 
-}
-
 
 /* =========================================================
-   TOAST
+   SCROLL REVEAL
 ========================================================= */
 
-let toastTimer;
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target
+                        .classList.add("visible");
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
+        }
+    );
 
 
-function showToast(message){
+document
+    .querySelectorAll(".reveal")
+    .forEach(el => {
 
-    const toast =
-        document.getElementById("toast");
+        observer.observe(el);
 
-    toast.textContent =
-        message;
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-        setTimeout(()=>{
-
-            toast.classList.remove("show");
-
-        },2500);
-
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-window.addEventListener(
-    "load",
-    ()=>{
-
-        setTimeout(()=>{
-
-            document
-            .getElementById("loader")
-            .classList
-            .add("hidden");
-
-        },600);
-
-    }
-);
+    });
 
 
 /* =========================================================
-   INICIO
+   INICIALIZAR
 ========================================================= */
 
 renderWebsites();
